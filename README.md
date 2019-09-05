@@ -4,10 +4,10 @@ This project computes the RO(C4) homology of a point as a Green Functor, and bey
 Read the wiki for the full documentation/whitepaper. This is enough just to get you started
 
 ## Requirements
-To run the code you need a sufficiently recent version of MATLAB. I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. If you have a University account, you might be able to get an academic MATLAB license for free through your institution. At some point the project might be ported to C++ for accessibility and speed.
-
-Speaking of speed, to speed up execution time you can use the parallel processing package for MATLAB (free if you have MATLAB). With the parallel package, you can take advantage of multi-core systems; in my case I have gotten great results with an Intel 8700K. Be warned that with it you can hit 100% utilization on all cores so it's NOT advisable to run it on a laptop or other cooling-constrained system. At this time all the work is done on the CPU, so you don't need a GPU (and certainly not a computing-specific one).
-
+To run the code you need a sufficiently recent version of MATLAB.
+ I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. 
+ If you have a University account, you might be able to get an academic MATLAB license for free through your institution.
+ At some point the project might be ported to C++ for wider accessibility and speed.
 
 ## How do I compute the C4 homology of a point right now?
 Open the test algorithms folder and any of the three test scripts.  
