@@ -25,20 +25,20 @@ for n=1:2:rangeN
             end
             if  k==n-2 && m==1
                 if isequal(Answer,"Z^o_-")
-                    sprintf('The %d homology of (%d,%d) sphere is Z_-^o',k,n,-m)
+                    sprintf('The %d homology of (%d,%d) sphere is Z_-^{\flat}',k,n,-m)
                     found=found+1;
                 else
                     disp(Answer)
-                    error('The %d homology of (%d,%d) sphere is not Z^{op} minus',k,n,-m)
+                    error('The %d homology of (%d,%d) sphere is not Z_-^{\flat} minus',k,n,-m)
                 end
             end
             if  k==n-3 && n>=3 && m>=2
                 if isequal(Answer,"Q^o")
-                    sprintf('The %d homology of (%d,%d) sphere is Q^o',k,n,-m)
+                    sprintf('The %d homology of (%d,%d) sphere is Q^{\sharp}',k,n,-m)
                     found=found+1;
                 else
                     disp(Answer)
-                    error('The %d homology of (%d,%d) sphere is not Q^o',k,n,-m)
+                    error('The %d homology of (%d,%d) sphere is not Q^{\sharp}',k,n,-m)
                 end
             end
             if (n-2*m<k && k<=n-5 && k<0 && mod(k,2)==0) || (k==-2 && n==1 && m>=2)
@@ -113,20 +113,20 @@ for n=2:2:rangeN
             end
             if k==n-2 && m==1
                 if isequal(Answer,"L^o")
-                    sprintf('The %d homology of (%d,%d) sphere is L^o',k,n,-m)
+                    sprintf('The %d homology of (%d,%d) sphere is L^{\sharp}',k,n,-m)
                     found=found+1;
                 else
                     disp(Answer)
-                    error('The %d homology of (%d,%d) sphere is not L^o',k,n,-m)
+                    error('The %d homology of (%d,%d) sphere is not L^{\sharp}',k,n,-m)
                 end
             end
             if k==n-3  && m>=2
                 if isequal(Answer,"Q^o")
-                    sprintf('The %d homology of (%d,%d) sphere is Q^o',k,n,-m)
+                    sprintf('The %d homology of (%d,%d) sphere is Q^{\sharp}',k,n,-m)
                     found=found+1;
                 else
                     disp(Answer)
-                    error('The %d homology of (%d,%d) sphere is not Q^o',k,n,-m)
+                    error('The %d homology of (%d,%d) sphere is not Q^{\sharp}',k,n,-m)
                 end
             end
             if k==n-2*m && n-2*m>=0 && m>=2

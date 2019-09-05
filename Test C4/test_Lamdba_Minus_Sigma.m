@@ -90,11 +90,11 @@ for n=1:2:rangeN
             end
             if -1<=k &&  k<-n+2*m && mod(k,2)==1
                 if isequal(Answer,"V")
-                    sprintf('The %d homology of (%d,%d) sphere is V',k,-n,m)
+                    sprintf('The %d homology of (%d,%d) sphere is overline Z/2',k,-n,m)
                     found=found+1;
                 else
                     disp(Answer)
-                    error('The %d homology of (%d,%d) sphere is not  V!',k,-n,m)
+                    error('The %d homology of (%d,%d) sphere is not overline Z/2!',k,-n,m)
                 end
                 
             end
@@ -110,11 +110,11 @@ for n=1:2:rangeN
             end
             if k>=-n+2 && k<-n+2*m && k<=-3 && mod(k,2)==1
                 if isequal(Answer,"Z/2+V")
-                    sprintf('The %d homology of (%d,%d) sphere is Z/2 plus V',k,-n,m)
+                    sprintf('The %d homology of (%d,%d) sphere is Z/2 plus overline Z/2',k,-n,m)
                     found=found+1;
                 else
                     disp(Answer)
-                    error('The %d homology of (%d,%d) sphere is not Z/2 plus V!',k,-n,m)
+                    error('The %d homology of (%d,%d) sphere is not Z/2 plus Voverline Z/2!',k,-n,m)
                 end
             end
             
