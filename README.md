@@ -1,7 +1,7 @@
 # C4-Homology
 This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor, and beyond...
  
-Read the wiki for the full documentation/whitepaper. This is enough just to get you started
+Read the wiki for the full documentation/whitepaper if you wish to contribute or check the source code. This is enough just to verify the results of the corresponding paper in an arbitrary range.
 
 ## Requirements
 To run the code you need a version of MATLAB.
