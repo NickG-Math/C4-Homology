@@ -7,7 +7,7 @@ Read the wiki for the full documentation if you wish to contribute or check the 
 To run the code you need a version of MATLAB.
  I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. 
  If you are associated with a University you might be able to get a free academic MATLAB license through your institution.
- At some point the project might be ported to C++ for wider availability and speed.
+ At some point the project might be ported to C++ for wider availability and speed, especially when it comes to AMD CPUs.
 
 ## How do I compute the C4 homology of a point with your program?
 Download the repository and add it to your MATLAB path. Then type the following in the command line:
@@ -52,20 +52,19 @@ To be added once it's user friendly enough
 
 ## The program runs too slowly for large ranges
 
-Significant improvements can be had by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges, run the following commands:
+- If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. As far as I know, there is unfortunately no way to change the BLAS (Basic Linear Algebra Subprograms) library in MATLAB.
 
+- Significant improvements can be had by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges, run the following commands:
 ```
 write_Data(rangeN,rangeM,1);
 load_Data;
 ```
-
 After that you can run the test functions with the third input being 1 eg
-
 ```
 test_Pure_Homology(rangeN,rangeM,1,Data);
 ```
 
-If you are still not thrilled about runtime speed, you can use the parallel processing package (see the corresponding sidebar of the wiki).
+- If you are still not thrilled about runtime speed, you can use the parallel processing package (see the corresponding sidebar of the wiki).
 
 
 ## For more details please consult the wiki.
