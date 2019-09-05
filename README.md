@@ -45,6 +45,27 @@ Finally to check <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma-m\lamb
 test_Lambda_Minus_Sigma(rangeN,rangeM,0,Data);
 ```
 
-For the multiplicative structure (to be added!)
+## But what about the multiplicative structure?
 
-For more details see the wiki
+To be added once it's user friendly enough
+
+
+## The program runs too slowly for large ranges
+
+Significant improvements can be had by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges, run this code:
+
+```
+write_Data(rangeN,rangeM,1);
+load_Data;
+```
+
+After that you can run the test functions with the third input being 1 eg
+
+```
+test_Pure_Homology(rangeN,rangeM,1,Data);
+```
+
+If you still have complaints about the speed, you can use the parallel processing package (see the Performance section in the sidebar of the wiki).
+
+
+## For more details see the wiki
