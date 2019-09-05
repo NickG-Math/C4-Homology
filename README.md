@@ -36,11 +36,11 @@ If you want to check the homology of <img src="http://latex.codecogs.com/svg.lat
 ```
 test_Pure_Cohomology(rangeN,rangeM,0,Data);
 ```
-To check <img src="http://latex.codecogs.com/svg.latex?S^{m\lambda-n\sigma}" border="0"/> run
+To check <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma-m\lambda}" border="0"/> run
 ```
 test_Sigma_Minus_Lambda(rangeN,rangeM,0,Data);
 ```
-Finally to check <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma-m\lambda}" border="0"/> run
+Finally to check <img src="http://latex.codecogs.com/svg.latex?S^{m\lambda-n\sigma}" border="0"/> run
 ```
 test_Lambda_Minus_Sigma(rangeN,rangeM,0,Data);
 ```
