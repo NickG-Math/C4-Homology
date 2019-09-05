@@ -65,7 +65,7 @@ After that you can run the test functions with the third input being 1 eg
 test_Pure_Homology(rangeN,rangeM,1,Data);
 ```
 
-If you are still not thrilled about runtime speed, you can use the parallel processing package (see the Performance section in the sidebar of the wiki).
+If you are still not thrilled about runtime speed, you can use the parallel processing package (see the corresponding sidebar of the wiki).
 
 
-## For more details see the wiki
+## For more details please consult the wiki.
