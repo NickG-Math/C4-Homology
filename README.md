@@ -13,24 +13,20 @@ To run the code you need a sufficiently recent version of MATLAB.
 Type the following in the command line:
 
 ```
-write_Data_Load_Data(8,7,1);
+write_Data(8,7,1);
+load_Data;
 test_Pure_Homology(8,7,1,Data);
 ```
 
 This will print the homology of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n between 0 and 8 and m between 0 and 7 in the form 
 ```
-The k homology of (n,m) sphere is MackeyFunctorSymbol
+The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
 where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
-Since the MATLAB display output does not support Latex by default, MackeyFunctorSymbol is going to be slightly different from the Mackey functor symbols from our paper. Here's a dictionary:
+Since the MATLAB display output does not support Latex, MackeyFunctorSymbol is the Latex *code* of the symbol from our paper. For example, "overline Z/2" stands for <img src="http://latex.codecogs.com/svg.latex?\overline{\langle \mathbb{Z}/2\rangle }" border="0"/>
 
-Z stands for <img src="http://latex.codecogs.com/svg.latex?\mathbb{Z}" border="0"/>
+The non obvious differences are as follows:
 
-
-
- 1. "V" stands for the Mackey functor that's Z/2 on the middle level and 0 elsewhere  
- 2. we use ^o to denote either the flat or the sharp operation (since 
-The other differences should be self evident.
 
 ## The repository is organized into 4 folders:
 
