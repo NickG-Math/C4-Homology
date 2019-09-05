@@ -17,9 +17,11 @@ write_Data_Load_Data(8,8,1);
 test_Pure_Homology(10,10,1,Data);
 ```
 
-This will print the homology of the n\SIGMA for n,m between -8 and 8 in the form "The k homology of (n,m) sphere is MackeyFunctorSymbol " where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
+This will print the homology of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n,m between -8 and 8 in the form "The k homology of (n,m) sphere is MackeyFunctorSymbol " where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
 Since the MATLAB display output does not support Latex by default, MackeyFunctorSymbol is going to be slightly different from the Mackey functor symbols from our paper. Here's a dictionary:
-1- "Z" stands for <img src="https://latex.codecogs.com/gif.latex?O_t=\text {\mathbb Z}" /> 
+
+Z stands for <img src="http://latex.codecogs.com/svg.latex?\mathbb{Z}" border="0"/>
+
 
 
  1. "V" stands for the Mackey functor that's Z/2 on the middle level and 0 elsewhere  
