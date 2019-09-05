@@ -1,5 +1,6 @@
 # C4-Homology
-This project computes the RO(C4) homology of a point as a Green Functor, and beyond...
+This project computes the <img src="http://latex.codecogs.com/gif.latex?RO(C4)" border="0"/>
+ homology of a point as a Green Functor, and beyond...
  
 Read the wiki for the full documentation/whitepaper. This is enough just to get you started
 
