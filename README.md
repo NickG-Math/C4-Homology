@@ -52,7 +52,7 @@ To be added once it's user friendly enough
 
 ## The program runs too slowly for large ranges
 
-- If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. As far as I know, there is unfortunately no way to change the BLAS (Basic Linear Algebra Subprograms) library in MATLAB.
+- If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. So you should change the default BLAS (Basic Linear Algebra Subprograms) MATLAB uses to an open source one like OpenBLAS (I have not tested this though).
 
 - Significant improvements can be had by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges, run the following commands:
 ```
