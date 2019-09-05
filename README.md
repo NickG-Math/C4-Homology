@@ -1,6 +1,5 @@
 # C4-Homology
- Compute the RO(C4) homology of a point as a Green Functor, and beyond...
- 
+This project computes the RO(C4) homology of a point as a Green Functor, and beyond...
  
 Read the wiki for the full documentation/whitepaper. This is enough just to get you started
 
