@@ -9,17 +9,17 @@ To run the code you need a sufficiently recent version of MATLAB.
  If you have a University account, you might be able to get an academic MATLAB license for free through your institution.
  At some point the project might be ported to C++ for wider accessibility and speed.
 
-## How do I compute the C4 homology of a point right now?
+## How do I compute the C4 homology of a point right away?
 Type the following in the command line:
 
 ```
-write_Data(8,7,1);
+write_Data(1,1,1);
 load_Data;
-test_Pure_Homology(8,7,1,Data);
+test_Pure_Homology(8,7,0,Data);
 ```
 
 This will compute the homology of 
-<img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for <img src="http://latex.codecogs.com/svg.latex? 0\le n\le 8" border="0"/> and <img src="http://latex.codecogs.com/svg.latex? 0\le m\le 7" border="0"/>, check the answer against the tables in our paper and print the answer in the form 
+<img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7, check the answer against the tables in our paper and print the answer in the form 
 ```
 The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
@@ -27,16 +27,25 @@ where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
 
 Since the MATLAB display output does not support Latex, MackeyFunctorSymbol is the Latex *code* of the symbol from our paper. For example, "overline Z/2" stands for <img src="http://latex.codecogs.com/svg.latex?\overline{\langle \mathbb{Z}/2\rangle }" border="0"/>
 
-If you want to check another range you can call the function as
+If you want to check a different range n=0,...,rangeN, m=0,...,rangeM run
 ```
-test_Pure_Homology(rangeN,rangeM,useData,Data);
+test_Pure_Homology(rangeN,rangeM,0,Data);
 ```
-where useData can be 0 or 1 and has no effect for now but is included for consistency.
 
-If you want to check the homology of <img src="http://latex.codecogs.com/svg.latex?S^{-n\sigma-m\lambda}" border="0"/> for n=-rangeN,...,0 and m=-rangeM,...,0 then run
+If you want to check the homology of <img src="http://latex.codecogs.com/svg.latex?S^{-n\sigma-m\lambda}" border="0"/> run
 ```
-test_Pure_Cohomology(rangeN,rangeM,useData,Data);
+test_Pure_Cohomology(rangeN,rangeM,0,Data);
 ```
+To check <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma-m\lambda}" border="0"/> run
+```
+test_Lamdba_Minus_Sigma(rangeN,rangeM,0,Data);
+```
+Finally to check <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma-m\lambda}" border="0"/> run
+```
+test_Sigma_Minus_Lambda(rangeN,rangeM,0,Data);
+```
+
+
 
 ## The repository is organized into 4 folders:
 
