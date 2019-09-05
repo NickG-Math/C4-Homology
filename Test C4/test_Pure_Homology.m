@@ -36,8 +36,7 @@ for n=0:rangeN
             if mod(n,2)==0 && k>=n && k<n+2*m && mod(k,2)==0
                 if isequal(Answer,"Z/4")
                     sprintf('The %d homology of the (%d,%d) sphere is Z/4',k,n,m)
-                                    found=found+1;
-
+                    found=found+1;
                 else
                     disp(Answer)
                     error('The %d homology of the (%d,%d) sphere is not Z/4',k,n,m)
