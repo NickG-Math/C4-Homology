@@ -6,8 +6,8 @@ Read the wiki for the full documentation if you wish to contribute or check the 
 ## What are the requirements to run the program?
 To run the code you need a version of MATLAB.
  I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. 
- If you have a University account, you might be able to get an academic MATLAB license for free through your institution.
- At some point the project might be ported to C++ for wider accessibility and speed.
+ If you are associated with a University you might be able to get a free academic MATLAB license through your institution.
+ At some point the project might be ported to C++ for wider availability and speed.
 
 ## How do I compute the C4 homology of a point with your program?
 Download the repository and add it to your MATLAB path. Then type the following in the command line:
