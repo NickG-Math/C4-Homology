@@ -10,9 +10,18 @@ To run the code you need a sufficiently recent version of MATLAB.
  At some point the project might be ported to C++ for wider accessibility and speed.
 
 ## How do I compute the C4 homology of a point right now?
-Open the test algorithms folder and any of the three test scripts.  
+Type the following in the command line:
+
+```write_Data_Load_Data(8,8,1);
+test_Pure_Homology(10,10,1,Data)```
+This will print the homology of S^{nsigma+mlambda} for n,m between -8 and 8 in the form "The k homology of (n,m) sphere is MackeyFunctorSymbol " where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
+Since the MATLAB display output does not support Latex by default, MackeyFunctorSymbol is going to be slightly different from the Mackey functor symbols from our paper. Here's a dictionary:
+1- "Z" stands for <img src="https://latex.codecogs.com/gif.latex?O_t=\text {\mathbb Z}" /> 
 
 
+ 1. "V" stands for the Mackey functor that's Z/2 on the middle level and 0 elsewhere  
+ 2. we use ^o to denote either the flat or the sharp operation (since 
+The other differences should be self evident.
 
 ## The repository is organized into 4 folders:
 
@@ -25,5 +34,5 @@ This contains the algorithms that (together with the general purpose ones) compu
 ### C4 Data: 
 When using the functions in General or C4 specific, there are a few calculations that are constantly repeated. This folder contains functions that can perform these calculations once and save the results in .m files. These results are then loaded into a single variable ```Data``` of type struct. This is input for many of the functions in the other two folders. ```Data``` also includes variables that are fixed, such as a Mackey functor list that includes the names of the Mackey functors corresponding to their Lewis diagrams. 
 
-### Test Algorithms:
-This contains scripts that test the output of the C4 specific algorithms against the results in our paper. They can be used to either test those results (if one trusts the algorithms), or the algorithms (if one trusts the math). Ultimately, the best use of it is regression testing: If a change is made in the core algorithms, it's best to run these tests to make sure it's not a regression. 
+### Test C4:
+This contains functions that test the output of the C4 specific algorithms against the results in our paper. They can be used to either test those results (if one trusts the algorithms), or the algorithms (if one trusts the math). Ultimately, the best use of it is regression testing: If a change is made in the core algorithms, it's best to run these tests to make sure it's not a regression. 
