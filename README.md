@@ -1,5 +1,5 @@
 # C4-Homology
-This project computes the ![](https://latex.codecogs.com/svg.latex?RO(C_4)) homology of a point as a Green Functor, and beyond...
+This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor, and beyond...
  
 Read the wiki for the full documentation/whitepaper. This is enough just to get you started
 
@@ -17,7 +17,7 @@ write_Data_Load_Data(8,8,1);
 test_Pure_Homology(10,10,1,Data);
 ```
 
-This will print the homology of S^{nsigma+mlambda} for n,m between -8 and 8 in the form "The k homology of (n,m) sphere is MackeyFunctorSymbol " where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
+This will print the homology of the n\SIGMA for n,m between -8 and 8 in the form "The k homology of (n,m) sphere is MackeyFunctorSymbol " where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
 Since the MATLAB display output does not support Latex by default, MackeyFunctorSymbol is going to be slightly different from the Mackey functor symbols from our paper. Here's a dictionary:
 1- "Z" stands for <img src="https://latex.codecogs.com/gif.latex?O_t=\text {\mathbb Z}" /> 
 
