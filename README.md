@@ -18,7 +18,7 @@ load_Data;
 test_Pure_Homology(8,7,1,Data);
 ```
 
-This will print the homology of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n between 0 and 8 and m between 0 and 7 in the form 
+This will compute the homology of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7, check the answer against the tables in our paper and print the answer in the form 
 ```
 The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
@@ -26,9 +26,15 @@ where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
 
 Since the MATLAB display output does not support Latex, MackeyFunctorSymbol is the Latex *code* of the symbol from our paper. For example, "overline Z/2" stands for <img src="http://latex.codecogs.com/svg.latex?\overline{\langle \mathbb{Z}/2\rangle }" border="0"/>
 
-Anyway back to the output, whenever you call the function 
+If you want to check another range you can call the function as
 ```
 test_Pure_Homology(rangeN,rangeM,useData,Data);
+```
+where useData can be 0 or 1 and has no effect for now but is included for consistency.
+
+If you want to check the homology of <img src="http://latex.codecogs.com/svg.latex?S^{-n\sigma-m\lambda}" border="0"/> for n=-rangeN,...,0 and m=-rangeM,...,0 then run
+```
+test_Pure_Cohomology(rangeN,rangeM,useData,Data);
 ```
 
 ## The repository is organized into 4 folders:
