@@ -12,7 +12,8 @@ To run the code you need a sufficiently recent version of MATLAB.
 ## How do I compute the C4 homology of a point right now?
 Type the following in the command line:
 
-```write_Data_Load_Data(8,8,1);
+```
+write_Data_Load_Data(8,8,1);
 test_Pure_Homology(10,10,1,Data);
 ```
 
