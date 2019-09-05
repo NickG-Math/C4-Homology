@@ -16,4 +16,4 @@ Data.linearToMatrix=C4_Change_Basis.linearToMatrix;
 Data.primeToLinear=C4_Change_Basis.primeToLinear;
 Data.ChangeBasis=C4_Change_Basis.ChangeBasis;
 
-clear C4_Mackey_List C4_Standard_Chains C4_Mackey_List;
+clear C4_Mackey_List C4_Standard_Chains C4_Change_Basis;
