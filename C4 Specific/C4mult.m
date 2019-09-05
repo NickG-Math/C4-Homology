@@ -83,7 +83,7 @@ leftconvproduct=leftconvproduct(:);  %We multiply the GC{1} with each entry of G
 
 
 %Then we change the basis
-[convlefttocanon, ~]=boxchangebasisfast(rankC{1}{k1+1},rankD{1}{k2+1},useData,Data);
+[convlefttocanon, ~]=boxchangebasis(rankC{1}{k1+1},rankD{1}{k2+1},useData,Data);
 productcanon=convlefttocanon*leftconvproduct;
 %Finally we pad it
 product=cell(1,4);

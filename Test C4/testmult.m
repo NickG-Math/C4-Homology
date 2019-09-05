@@ -1,6 +1,6 @@
 clc
 rangen=15;
-useData=1;
+useData=0;
 
 %Test asigma^n*asigma^m=asigma^{n+m}
 for n1=1:2*rangen
