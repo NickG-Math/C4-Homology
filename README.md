@@ -13,7 +13,8 @@ To run the code you need a sufficiently recent version of MATLAB.
 Type the following in the command line:
 
 ```write_Data_Load_Data(8,8,1);
-test_Pure_Homology(10,10,1,Data)```
+test_Pure_Homology(10,10,1,Data);
+```
 
 This will print the homology of S^{nsigma+mlambda} for n,m between -8 and 8 in the form "The k homology of (n,m) sphere is MackeyFunctorSymbol " where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
 Since the MATLAB display output does not support Latex by default, MackeyFunctorSymbol is going to be slightly different from the Mackey functor symbols from our paper. Here's a dictionary:
