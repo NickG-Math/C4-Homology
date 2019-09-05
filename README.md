@@ -1,7 +1,7 @@
 # C4-Homology
 This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor.
  
-Read the wiki for the full documentation if you wish to contribute or check the source code. What follows is an FAQ that should be enough to verify the results of our paper in your preferred range.
+Read the [Wiki](https://github.com/NickG-Math/C4-Homology.wiki.git) for the full documentation if you wish to contribute or read the source code. What follows is an FAQ that should be enough to verify the results of our paper in your preferred range.
 
 ## What do I need to run the code?
 All  you need is a version of MATLAB.
@@ -64,7 +64,7 @@ After that you can run the test functions with the third input being 1 eg
 test_Pure_Homology(rangeN,rangeM,1,Data);
 ```
 
-- If you are still not thrilled about runtime speed, you can use the parallel processing package (see the corresponding sidebar of the wiki).
+- If you are still not satisfied with runtime speed, you can use the parallel processing package (see the corresponding page in the [Wiki](https://github.com/NickG-Math/C4-Homology.wiki.git)).
 
 
 ## For more details please consult the wiki.
