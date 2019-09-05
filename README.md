@@ -19,12 +19,7 @@ test_Pure_Homology(8,7,1,Data);
 ```
 
 This will compute the homology of 
-<img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> 
-for 
-<img src="http://latex.codecogs.com/svg.latex?n=0,...,8" border="0"/> 
-and 
-<img src="http://latex.codecogs.com/svg.latex?m=0,...,7" border="0"/>
-, check the answer against the tables in our paper and print the answer in the form 
+<img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for <img src="http://latex.codecogs.com/svg.latex? 0\le n\le 8" border="0"/> and <img src="http://latex.codecogs.com/svg.latex? 0\le m\le 7" border="0"/>, check the answer against the tables in our paper and print the answer in the form 
 ```
 The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
