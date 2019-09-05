@@ -3,8 +3,8 @@ This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Func
  
 Read the wiki for the full documentation if you wish to contribute or check the source code. What follows is an FAQ that should be enough to verify the results of our paper in your preferred range.
 
-## What are the requirements to run the program?
-To run the code you need a version of MATLAB.
+## What do I need to run the code?
+All  you need is a version of MATLAB.
  I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. 
  If you are associated with a University you might be able to get a free academic MATLAB license through your institution.
  At some point the project might be ported to C++ for wider availability and speed, especially when it comes to AMD CPUs.
