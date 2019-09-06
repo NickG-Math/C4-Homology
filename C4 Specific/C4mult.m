@@ -2,6 +2,12 @@ function [basis,varargout]=C4mult(level,first,second,useData,Data,varargin)  %va
 %varargout is simplified basis (see the end), homology, generators resp.
 varargout=cell(1,3); varargout{2}=cell(1,3); varargout{3}=cell(1,3);
 
+if isequal(first,zeros(1,3)) || isequal(second,zeros(1,3)) %We multiply with [0,0,0] i.e. 1. No point in any more computations
+    basis=1;
+    varargout{1}=1;
+    return
+end
+    
 k1=first(1); n1=first(2); m1=first(3); k2=second(1); n2=second(2); m2=second(3);
 
 %Exception when complex is 0->Z->0 so we don't have to fix the chains all

@@ -21,4 +21,4 @@ MackeyList{17}={{[1,1,2,1,1,1], [2,1], [0,1], [0,2]} "L+Z/2"}; %action, Res(2), 
 MackeyList{18}={{[1,1,2,1,1,1], [2,1], [1,1], [0,2]} "L+Z/2"}; %action, Res(2), Tr(2), H(2),H(1) in the first matrix, H(4), Tr(4), Res(4) in the second
 
 
-save('Data\C4_Mackey_List.mat');
+save('C4_Mackey_List.mat');

@@ -39,4 +39,4 @@ for i=1:n
     end
 end
 
-save('Data\C4_Change_Basis.mat','longprimelist','linearToMatrix','primeToLinear','ChangeBasis');
+save('C4_Change_Basis.mat','longprimelist','linearToMatrix','primeToLinear','ChangeBasis');

@@ -8,4 +8,4 @@ for n=-range_n:range_n
         end
     end
 end
-save('Data\C4_Standard_Chains.mat');
+save('C4_Standard_Chains.mat');
