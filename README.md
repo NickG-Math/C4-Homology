@@ -1,13 +1,13 @@
 # C4-Homology
 This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor.
  
-Read the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki) for the full documentation if you wish to contribute or read the source code. What follows is an FAQ that should be enough to verify the results of our paper in your preferred range.
+Read the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki) for the full documentation. What follows is an FAQ that should be enough to verify the results of our paper in your preferred finite range.
 
 ## What do I need to run the code?
-All  you need is a version of MATLAB.
+All you need is a version of MATLAB.
  I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. 
  If you are associated with a University you might be able to get a free academic MATLAB license through your institution.
- At some point the project might be ported to C++ for wider availability and speed, especially when it comes to AMD CPUs.
+ At some point the project might be ported to C++ for wider availability and speed, but for now the code is in MATLAB
 
 ## How do I compute the C4 homology of a point with your program?
 Download the repository and add it to your MATLAB path. Then type the following in the command line:
@@ -18,8 +18,14 @@ load_Data;
 test_Pure_Homology(8,7,0,Data);
 ```
 
-This will compute the homology of 
-<img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7, check the answer against the tables in our paper and print the answer in the form 
+This will perform three operations:
+
+- Compute the homology of 
+<img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7
+
+- check the answer against the tables in our paper, giving out an error if there is a mismatch and
+
+- print the answer in the form 
 ```
 The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
