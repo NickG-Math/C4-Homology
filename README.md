@@ -1,12 +1,12 @@
 # C4-Homology
 This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor.
  
-Read the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki) for the full documentation. What follows is an **FAQ** that should be enough to verify the results of our paper in your preferred finite range.
+Read the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki) for the full documentation. What follows is an **FAQ**; if you want to verify the results of our paper, in your preferred finite range, look no further.
 
 ## What do I need to run this code?
 All you need is a version of MATLAB.
- I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave. 
- If you are associated with a University you might be able to get a free academic MATLAB license through your institution.
+ I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave that can also run MATLAB code. 
+ If you are associated with a University you can probably get a free academic MATLAB license through your institution.
  At some point the project might be ported to C++ for wider availability and speed, but for now the code is in MATLAB
 
 ## How do I compute the C4 homology of a point?
@@ -31,7 +31,7 @@ The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
 where ```MackeyFunctorSymbol``` is our notation of the corresponding Mackey functor.
 
-Since the MATLAB display output does not support Latex, ```MackeyFunctorSymbol``` is the Latex *code* of the symbol from our paper. For example, "overline Z/2" stands for <img src="http://latex.codecogs.com/svg.latex?\overline{\langle \mathbb{Z}/2\rangle }" border="0"/>
+Since the MATLAB display output does not support Latex, ```MackeyFunctorSymbol``` is more or less the Latex *code* of the symbol from our paper. For example, ```overline Z/2``` stands for <img src="http://latex.codecogs.com/svg.latex?\overline{\langle \mathbb{Z}/2\rangle }" border="0"/>
 
 If you want to verify a different range, say n=0,...,rangeN, m=0,...,rangeM, run
 ```
@@ -57,7 +57,7 @@ For the multiplicative generators of <img src="http://latex.codecogs.com/svg.lat
 ```
 test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
-The range variables specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma,usigma,alambda,ulambda``` are allowed to range in. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```.
+The input variables ```rangeN1, rangeN2, rangeM1, rangeM2``` specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma, alambda, ulambda``` are allowed to range in, respectively. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```.
 
 This command does three things:
 
