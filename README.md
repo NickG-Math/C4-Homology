@@ -67,11 +67,15 @@ This command does three things:
 
 - prints the answer in a variable form depending on the generator, that can look like
 
-```Top Generator verified: asigma^2*alambda^3```
+```
+Top Generator verified: asigma^2*alambda^3
+```
 
 or
 
-```Mid Generator verified: usigma^4*bar(ulambda^2)```
+```
+Mid Generator verified: usigma^4*bar(ulambda^2)
+```
 
 We don't check bottom level generators since the nonequivariant homology of spheres has obvious multiplicative structure.
 
