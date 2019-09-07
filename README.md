@@ -117,7 +117,7 @@ load_Data;
 ```
 for a large enough ```LargeNumber``` depending on the ranges you are using.
 
-The higher the ```LargeNumber``` you select, the wider the ranges you can check with precomputed Data, but the more memory the ```Data``` variable consumes. Eg for ```LargeNumber=50```, ```Data``` consumes 1.1GB of RAM and your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
+The larger the ```LargeNumber``` you select, the wider the ranges you can check but the more memory ```Data``` consumes. Eg for ```LargeNumber=50```, ```Data``` consumes 1.1GB of RAM and your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
 
 ## Any other way to make it even faster ?
 
