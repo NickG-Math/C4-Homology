@@ -18,7 +18,7 @@ Data=load_Data;
 test_Pure_Homology(8,7,0,Data);
 ```
 
-This will perform three operations:
+The last command will perform three operations:
 
 - Compute the homology of 
 <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7
@@ -59,7 +59,7 @@ test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
 The input variables ```rangeN1, rangeN2, rangeM1, rangeM2``` specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma, alambda, ulambda``` are allowed to range in, respectively. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```.
 
-This command does three things:
+Anyway the command above does three things:
 
 - Computes the product of these Euler and orientation classes and checks if it's a generator
 
