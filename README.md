@@ -119,7 +119,7 @@ for a large enough ```LargeNumber``` depending on the ranges you are using.
 
 The larger the ```LargeNumber``` you select, the wider the ranges you can check but the more memory ```Data``` consumes. Eg for ```LargeNumber=50```, ```Data``` consumes 1.1GB of RAM and your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
 
-## Even faster ?
+## How about even faster ?
 
 - Try using the parallel processing package ([Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
 
