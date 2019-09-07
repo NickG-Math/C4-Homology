@@ -103,7 +103,7 @@ After that you can run the test functions with the third input being 1 eg
 test_Pure_Homology(rangeN,rangeM,1,Data);
 ```
 
-Warning: If you call
+Warning: If you run
 ```
 test_Sigma_Minus_Lambda_Mult(rangeN1,rangeN2,rangeM1,rangeM2,1,Data);
 test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,1,Data);
