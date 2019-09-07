@@ -117,7 +117,7 @@ load_Data;
 ```
 for a large enough ```LargeNumber``` depending on the ranges you are using.
 
-The larger the ```LargeNumber``` you select the wider the ranges you can check (in the current implementation memory is not an issue). Eg for ```LargeNumber=50```, ```Data``` consumes 1.1GB of RAM and your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
+The larger the ```LargeNumber``` you select the wider the ranges you can check (in the current implementation memory is not an issue). Eg for ```LargeNumber=50``` your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
 
 ## How about even faster ?
 
