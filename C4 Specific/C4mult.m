@@ -1,6 +1,5 @@
-function [basis,varargout]=C4mult(level,first,second,useData,Data,varargin)  %varargin selects the generator if there are multiple ones
+function [basis,varargout]=C4mult(level,first,second,useData,Data,varargin)  %varargin is used if there are multiple generates at level
 %varargout is simplified basis (see the end), homology, generators resp.
-varargout=cell(1,3); varargout{2}=cell(1,3); varargout{3}=cell(1,3);
 
 if isequal(first,zeros(1,3)) || isequal(second,zeros(1,3)) %We multiply with [0,0,0] i.e. 1. No point in any more computations
     basis=1;
@@ -9,14 +8,6 @@ if isequal(first,zeros(1,3)) || isequal(second,zeros(1,3)) %We multiply with [0,
 end
     
 k1=first(1); n1=first(2); m1=first(3); k2=second(1); n2=second(2); m2=second(3);
-
-%Exception when complex is 0->Z->0 so we don't have to fix the chains all
-%the time
-if isequal([k1,n2,m1,k2,n2,m2],zeros(1,6)) %1 times 1
-    basis=1;
-    varargout{1}=1;
-    return
-end
 
 %First we get our chains
 [rankC,C]=C4allChains(n1,m1,useData,Data);
@@ -27,6 +18,7 @@ k2=C4kreindex(k2,n2,m2);
 %Basic check
 if k1<0 || k1>abs(n1)+2*abs(m1) || k2<0 || k2>abs(n2)+2*abs(m2)
     basis=[];
+    varargout{1}=[];
     return
 end
 
@@ -34,11 +26,12 @@ end
 [GC{level},HC{level}]=Homology(C{level}{k1+2},C{level}{k1+1});
 if isequal(HC{level},0)
     basis=[];
+    varargout{1}=[];
     return
 elseif size(HC{level},2)>1  %If multiple generators, use varargin to decide which to use
     if isempty(varargin) || size(varargin{1},2)==0
         disp(HC{level})
-        error('Please enter which generator of the above you want as x or [x,y]')
+        error('Please enter which generator x of the above you want as [x,0]')
     else
         GC{level}=GC{level}(:,varargin{1}(1));
     end
@@ -46,11 +39,12 @@ end
 [GD{level},HD{level}]=Homology(D{level}{k2+2},D{level}{k2+1});
 if isequal(HD{level},0)
     basis=[];
+    varargout{1}=[];
     return
 elseif size(HD{level},2)>1
     if isempty(varargin) || size(varargin{1},2)==1
         disp(HD{level})
-        error('Please enter which generator of the above you want as [0,y] or [x,y]')
+        error('Please enter which generator of the above you want as [0,y]')
     else
         GD{level}=GD{level}(:,varargin{1}(2));
     end
@@ -118,11 +112,13 @@ end
 [Generatoratproduct,Homologyatproduct,SmithVariables]=Homology(Boxed{level}{k1+k2+2},Boxed{level}{k1+k2+1});
 q=Homologyelement(product(level),SmithVariables);
 basis=q{1};
+
 %For varargout{1} we output the simplified basis, where are allowed to
 %rechoose the generator so as to get the answer to be 0,1,2 for Z/4 etc.
 %So it's true only up to signs
+
 varargout{1}=abs(basis);
-if Homologyatproduct==4 && basis==3
+if isequal(Homologyatproduct,4) && basis==3
     varargout{1}=1;
 end
 varargout{2}{1}=HC{level};

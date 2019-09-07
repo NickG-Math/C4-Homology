@@ -14,7 +14,7 @@ for i=0:s+t %We compute the left&right differentials out (C box D)_i and its ran
         
         rank{i+1}{j+1}=rankmult(rankC{j+1},rankD{i-j+1}); %The rank of C_j box D_{i-j} in matrix form
         
-        if rankC{j+1}~=1 && rankD{i-j+1}~=1 %We make special provisions if one of C_j or D_{i-j} is Z. In that case some change of basis matrices below are guaranteed to be identities, 
+        if ~isequal(rankC{j+1},1) && ~isequal(rankD{i-j+1},1) %We make special provisions if one of C_j or D_{i-j} is Z. In that case some change of basis matrices below are guaranteed to be identities, 
                                             %so we are saving time by not multiplying with them. Ultimately all these if statements can be removed, at the cost of some speed.
             [ConvLeftToCanonDomain, ConvRightToCanonDomain]=boxchangebasis(rankC{j+1},rankD{i-j+1},useData,Data);
             flag=1;
@@ -29,7 +29,7 @@ for i=0:s+t %We compute the left&right differentials out (C box D)_i and its ran
             
             convLeftdiff=blkdiagopt(C{j+1},sum(rankD{i-j+1}));              %The left differential in the convenient basis   
             
-            if rankC{j}~=1 && rankD{i-j+1}~=1
+            if ~isequal(rankC{j},1) && ~isequal(rankD{i-j+1},1)
                 [ConvLeftToCanonRange, ~]=boxchangebasis(rankC{j},rankD{i-j+1},useData,Data); %The change of basis matrix in the range
                 if flag
                     LeftDiff{j+1}=ConvLeftToCanonRange*convLeftdiff*ConvLeftToCanonDomain';             %The left differential in the canonical basis
@@ -49,7 +49,7 @@ for i=0:s+t %We compute the left&right differentials out (C box D)_i and its ran
         if i-j>=1 %I.e. we have a right differential
             
             convRightdiff=blkdiagopt(D{i-j+1},sum(rankC{j+1}));
-            if rankC{j+1}~=1 && rankD{i-j}~=1
+            if ~isequal(rankC{j+1},1) && ~isequal(rankD{i-j},1)
                 [~,ConvRightToCanonRange]=boxchangebasis(rankC{j+1},rankD{i-j},useData,Data); %The change of basis matrix in the range
                 if flag
                    RightDiff{j+1}=(-1)^j*ConvRightToCanonRange*convRightdiff*ConvRightToCanonDomain'; %The signed right differential in the canonical basis

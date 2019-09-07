@@ -6,6 +6,20 @@ if size(a,2)==1 && size(b,2)==1
         rank=b*ones(1,a);
     end
 else
-    rank=bsxfun(@rankmult,a,b); %bsxfun will perform rankmult (a(1),b) then a(2),b etc. and then append them together.
+    rank=[];
+    for i=1:size(a,2)
+        for j=1:size(b,2)
+            rank=[rank,rankmult(a(i),b(j))];
+        end
+    end
 end
-end
+
+
+% The nonvectorized version is actrually faster than
+%  helpcell=cell(size(a,2),size(b,2));
+%     for i=1:size(b,2)
+%         for j=1:size(a,2)
+%            helpcell{i,j}=rankmult(a(j),b(i));
+%         end
+%     end
+%     rank=[helpcell{:,:}];

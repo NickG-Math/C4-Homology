@@ -2,32 +2,27 @@ function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,
 %Computes the canonical and left/right convenient bases for an equivariant
 %basis and returns the change of basis matrices.
 
-if isequal(rankC,1)
-    convlefttocanon=eye(sum(rankD));
-    convrighttocanon=eye(sum(rankD));
-    return
-end
-if isequal(rankD,1)
-    convlefttocanon=eye(sum(rankC));
-    convrighttocanon=eye(sum(rankC));
-    return
-end
+%These optimizations are now done in the Box function, so no point
+%rechecking
+% if isequal(rankC,1)
+%     convlefttocanon=eye(sum(rankD));
+%     convrighttocanon=eye(sum(rankD));
+%     return
+% end
+% if isequal(rankD,1)
+%     convlefttocanon=eye(sum(rankC));
+%     convrighttocanon=eye(sum(rankC));
+%     return
+% end
 
 
-%down the cases where you are in range
 if useData
-   % try  Try and catch if you expect to go outsite data range, but will slow
-        first=matrixToLinear(rankC,Data);
-        second=matrixToLinear(rankD,Data);
-        convlefttocanon=Data.ChangeBasis{first,second}{1};
-        convrighttocanon=Data.ChangeBasis{first,second}{2}; %A bit faster than [convlefttocanon,convrighttocanon]=Data.ChangeOfBasisData{matrixToLinear(rankC,Data),matrixToLinear(rankD,Data)}{:};
-        return
-   % catch
-        %  fprintf('Change of basis for %s times %s performed without using data ',mat2str(rankC),mat2str(rankD))
-   % end
+    ChangeBasis=Data.ChangeBasis; %Faster saving the variable here
+    convlefttocanon=ChangeBasis{1,size(rankC,2),size(rankD,2),rankC(1),rankC(end),rankD(1),rankD(end)};
+    convrighttocanon=ChangeBasis{2,size(rankC,2),size(rankD,2),rankC(1),rankC(end),rankD(1),rankD(end)};
+    % Bit faster than [convlefttocanon,convrighttocanon]=Data.ChangeBasis{:,size(rankC,2),size(rankD,2),rankC(1),rankC(end),rankD(1),rankD(end)};
+    return
 end
-
-
 
 
 s=size(rankC,2); %The basis for C is x_1,gx_1,...,g^{rankC(1)-1}x_1,x_2,....,g^{rankC(s)-1}x_s

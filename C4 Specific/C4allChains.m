@@ -10,7 +10,7 @@ if useData
         Csigma=Data.ChainsStandard{sign(n)+2,2,abs(n)+1,1};
         rankClambda=Data.rankStandard{2,sign(m)+2,1,abs(m)+1}; %Load S^{mlambda}
         Clambda=Data.ChainsStandard{2,sign(m)+2,1,abs(m)+1};
-        %[rank{1},~,D{1}]=Box(rankClambda,rankCsigma,Clambda,Csigma); %One way of doing it
+      %  [rank{1},~,D{1}]=Box(rankClambda,rankCsigma,Clambda,Csigma,useData,Data); %One way of doing it
         [rank{1},~,D{1}]=Box(rankCsigma,rankClambda,Csigma,Clambda,useData,Data); %The other way of doing it
     end
 else
@@ -19,8 +19,8 @@ else
     else
         [rankCsigma,Csigma]=C4standard(n,0);
         [rankClambda,Clambda]=C4standard(0,m);        
-       %[rank{1},~,D{1}]=Box(rankClambda,rankCsigma,Clambda,Csigma); %One way of doing it
-        [rank{1},~,D{1}]=Box(rankCsigma,rankClambda,Csigma,Clambda,useData,Data); %The other way of doing it
+        [rank{1},~,D{1}]=Box(rankClambda,rankCsigma,Clambda,Csigma,useData,Data); %One way of doing it
+       % [rank{1},~,D{1}]=Box(rankCsigma,rankClambda,Csigma,Clambda,useData,Data); %The other way of doing it
     end
 end
 

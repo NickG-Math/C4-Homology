@@ -1,7 +1,5 @@
 function test_Lamdba_Minus_Sigma(rangeN,rangeM,useData,Data)
 
-% %For Even n>=2 and any m>=1 means that I only get Z,Z/4,Z/2,Q,0
-
 for n=2:2:rangeN
     for m=1:rangeM
         for k=-n:2*m
@@ -55,15 +53,6 @@ for n=2:2:rangeN
     end
 end
 
-
-
-
-
-
-
-
-
-%%%%%Odd n means Z_-, Z/2 plus Z_-, overlineZ/2, Z/2, Z/2 plus overlineZ/2, Q
 
 for n=1:2:rangeN
     for m=1:rangeM
