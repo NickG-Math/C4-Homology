@@ -66,8 +66,11 @@ This command does three things:
 - checks if the generator is also in our tables, giving out an error if there is a mismatch and
 
 - prints the answer in the form 
+
 ```Generator verified: NameOfGenerator```
+
 where NameOfGenerator can for example be
+
 ```asigma^2*alambda^3```
 
 ## The program runs too slowly for large ranges
