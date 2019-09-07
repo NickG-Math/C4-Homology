@@ -75,6 +75,16 @@ or
 
 We don't check bottom level generators since the nonequivariant homology of spheres has obvious multiplicative structure.
 
+To get the other equivariant spheres, run any of the following
+
+```
+test_Pure_Cohomology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
+test_Sigma_Minus_Lambda_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
+test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
+```
+
+
+
 ## The program runs too slowly for large ranges
 
 - If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. So you should change the default BLAS (Basic Linear Algebra Subprograms) MATLAB uses to an open source one like OpenBLAS (I am not sure if this is possible with MATLAB; I believe it is with Octave but I have not tested it).
