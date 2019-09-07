@@ -57,7 +57,7 @@ For the generators of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m
 ```
 test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
-The range variables specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma,usigma,alambda,ulambda``` are allowed to range in. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```
+The range variables specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma,usigma,alambda,ulambda``` are allowed to range in. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```.
 
 This command does three things:
 
@@ -84,22 +84,42 @@ test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
 
 
+## Can I speed up the program?
 
-## The program runs too slowly for large ranges
+Significant improvements can be had by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges   ```rangeN,rangeM```, run the following commands:
 
-- If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. So you should change the default BLAS (Basic Linear Algebra Subprograms) MATLAB uses to an open source one like OpenBLAS (I am not sure if this is possible with MATLAB; I believe it is with Octave but I have not tested it).
-
-- Significant improvements can be had by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges, run the following commands:
 ```
-write_Data(rangeN,rangeM,1);
+write_Data(NumberN,NumberM,1,1);
 load_Data;
 ```
+where ```NumberN, NumberM``` should be at least  ```rangeN, rangeM``` respectively.
+
 After that you can run the test functions with the third input being 1 eg
 ```
 test_Pure_Homology(rangeN,rangeM,1,Data);
 ```
 
+Warning: If you call
+```
+test_Sigma_Minus_Lambda_Mult(rangeN1,rangeN2,rangeM1,rangeM2,1,Data);
+test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,1,Data);
+```
+you will get an error 
+```Index in position 3 exceeds array bounds (must not exceed 1).```
+This is because you didn't precompute enough Data. So you must first run
+```
+write_Data(NumberN,NumberM,1,LargeNumber);
+load_Data;
+```
+for a large enough LargeNumber depending on the ranges you are using.
+
+
+Two other performance notes:
+
 - If you are still not satisfied with runtime speed, you can use the parallel processing package (see the corresponding page in the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
+
+- If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. So you should change the default BLAS (Basic Linear Algebra Subprograms) MATLAB uses to an open source one like OpenBLAS (I am not sure if this is possible with MATLAB; I believe it is with Octave but I have not tested it).
+
 
 
 ## For more details please consult the wiki.
