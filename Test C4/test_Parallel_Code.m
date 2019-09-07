@@ -1,17 +1,10 @@
-clc
-clearvars -except Data
-useData=1;
+function test_Parallel_Code(rangeN,rangeM,useData,Data)
 
-rangeN=10;
-rangeM=20;
-
-
-[rangeN,rangeM,distributedInputs]=distributeInputsToWorkers(rangeN,rangeM);
+[rangeN,rangeM,distributedInputs]=distribute_Inputs_To_Workers(rangeN,rangeM);
 distributedInputs(1,:)=2*distributedInputs(1,:)-1; %Get n to be odds from1 and above
 
 total=rangeN*rangeM;
-%cluster = parcluster;
-%delete(gcp('nocreate'))
+
 opts =parforOptions(gcp,'RangePartitionMethod','fixed','SubrangeSize',total/12);
 
 x=distributedInputs(1,:);
@@ -21,7 +14,6 @@ parfor (linear=1:total,opts)
     n=x(linear); %All odds from 0 up to the 2*range-1
     m=y(linear); %All from 0 up to the range
     for k=-n:2*m
-        logger1=[n,m];
         [~,~,~,~,~,Answer]=C4Mackeyfast(k,-n,m,useData,Data);
         found=0;
         if k==-n+2*m && k>=-1
