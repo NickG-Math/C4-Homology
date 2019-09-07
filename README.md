@@ -53,7 +53,7 @@ test_Lambda_Minus_Sigma(rangeN,rangeM,0,Data);
 
 ## But what about the multiplicative structure?
 
-For the generators of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> run
+For the multiplicative generators of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> run
 ```
 test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
