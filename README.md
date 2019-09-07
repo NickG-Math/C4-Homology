@@ -88,7 +88,7 @@ test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
 
 
-## Can I speed up the program?
+## Can I make the program go faster?
 
 Significant speed improvements can be achieved by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges   ```rangeN,rangeM```, run the following commands:
 
@@ -119,7 +119,7 @@ for a large enough ```LargeNumber``` depending on the ranges you are using.
 
 The higher the ```LargeNumber``` you select, the wider the ranges you can check with precomputed Data, but the more memory the ```Data``` variable consumes. Eg for ```LargeNumber=50```, ```Data``` consumes 1.1GB of RAM and your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
 
-## Any other way to squeeze even more speed out of it ?
+## Any other way to make it even faster ?
 
 - Try using the parallel processing package ([Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
 
