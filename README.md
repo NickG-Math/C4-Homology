@@ -53,11 +53,11 @@ test_Lambda_Minus_Sigma(rangeN,rangeM,0,Data);
 
 ## But what about the multiplicative structure?
 
-Run
+For the generators of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> run
 ```
 test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
-The range variables specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma,usigma,alambda,ulambda``` are allowed to range in.
+The range variables specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma,usigma,alambda,ulambda``` are allowed to range in. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```
 
 This command does three things:
 
@@ -65,13 +65,15 @@ This command does three things:
 
 - checks if the generator is also in our tables, giving out an error if there is a mismatch and
 
-- prints the answer in the form 
+- prints the answer in a variable form depending on the generator, that can look like
 
-```Generator verified: NameOfGenerator```
+```Top Generator verified: asigma^2*alambda^3```
 
-where NameOfGenerator can for example be
+or
 
-```asigma^2*alambda^3```
+```Mid Generator verified: usigma^4*bar(ulambda^2)```
+
+We don't check bottom level generators since the nonequivariant homology of spheres has obvious multiplicative structure.
 
 ## The program runs too slowly for large ranges
 
