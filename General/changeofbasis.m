@@ -10,5 +10,5 @@ if size(B,1)>1
     B=B(:);
     B=B';
 end
-change=double((B'==A));
+change=(B'==A);
 end

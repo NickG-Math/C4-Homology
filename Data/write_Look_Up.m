@@ -14,7 +14,15 @@ for i=1:size(rankA,2)
         firstB=B(1);
         lastB=B(end);
         lengthB=size(B,2);
-        [ChangeBasis{1,lengthA,lengthB,firstA,lastA,firstB,lastB},ChangeBasis{2,lengthA,lengthB,firstA,lastA,firstB,lastB}]=boxchangebasis(A,B,0,[]);
+        if size(A,2)==1 && size(B,2)==1 %Store as doubles in this super easy case for no overhead
+            [C,D]=boxchangebasis(A,B,0,[]);
+            ChangeBasis{1,lengthA,lengthB,firstA,lastA,firstB,lastB}=double(C);
+            ChangeBasis{2,lengthA,lengthB,firstA,lastA,firstB,lastB}=double(D);
+        else %store sparse logical for memory AND speed
+            [C,D]=boxchangebasis(A,B,0,[]);
+            ChangeBasis{1,lengthA,lengthB,firstA,lastA,firstB,lastB}=sparse(C);
+            ChangeBasis{2,lengthA,lengthB,firstA,lastA,firstB,lastB}=sparse(D);
+        end
     end
 end
 
