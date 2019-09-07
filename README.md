@@ -115,7 +115,7 @@ This is because you didn't precompute enough Data. So you must first run
 write_Data(NumberN,NumberM,1,LargeNumber);
 load_Data;
 ```
-for a large enough LargeNumber depending on the ranges you are using. The higher the LargeNumber you select, the larger ranges you can check with precomputed Data, but the more memory the ```Data``` variable consumes. Eg for LargeNumber=50, ```Data``` consumes 1.1GB of RAM and your available range includes rangeN1=rangeN2=rangeM1=rangeM2=10
+for a large enough LargeNumber depending on the ranges you are using. The higher the LargeNumber you select, the larger ranges you can check with precomputed Data, but the more memory the ```Data``` variable consumes. Eg for LargeNumber=50, ```Data``` consumes 1.1GB of RAM and your available range includes at least rangeN1=rangeN2=rangeM1=rangeM2=10
 
 ## Any other way to squeeze even more speed of it ?
 
