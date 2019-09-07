@@ -33,12 +33,12 @@ where MackeyFunctorSymbol is our notation of the corresponding Mackey functor.
 
 Since the MATLAB display output does not support Latex, MackeyFunctorSymbol is the Latex *code* of the symbol from our paper. For example, "overline Z/2" stands for <img src="http://latex.codecogs.com/svg.latex?\overline{\langle \mathbb{Z}/2\rangle }" border="0"/>
 
-If you want to check a different range n=0,...,rangeN, m=0,...,rangeM run
+If you want to verify a different range, say n=0,...,rangeN, m=0,...,rangeM, run
 ```
 test_Pure_Homology(rangeN,rangeM,0,Data);
 ```
 
-If you want to check the homology of <img src="http://latex.codecogs.com/svg.latex?S^{-n\sigma-m\lambda}" border="0"/> run
+If you want to check the homology of <img src="http://latex.codecogs.com/svg.latex?S^{-n\sigma-m\lambda}" border="0"/> (in the usual range n=0,...,rangeN and m=0,...,rangeM), run
 ```
 test_Pure_Cohomology(rangeN,rangeM,0,Data);
 ```
