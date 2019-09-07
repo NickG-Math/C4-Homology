@@ -90,13 +90,13 @@ test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 
 ## Can I make the program go faster?
 
-Significant speed improvements can be achieved by using precomputed Data so as to avoid repeat calculations. Once you have decided on the n,m ranges ```rangeN,rangeM```, run the following commands:
+Significant speed improvements can be achieved by precomputing data so as to avoid repeat calculations. Once you have decided on the n,m ranges ```rangeN,rangeM```, run the following commands:
 
 ```
 write_Data(NumberN,NumberM,1,1);
 Data=load_Data;
 ```
-where ```NumberN, NumberM``` must be at least  ```rangeN, rangeM``` respectively (pick the large enough to accomodate any ```rangeN, rangeM``` you may decide to check later).
+where ```NumberN, NumberM``` must be at least  ```rangeN, rangeM``` respectively (choose them large enough now to accomodate any ```rangeN, rangeM``` you may decide to check later).
 
 After that you can run the test functions with the third input being 1 eg
 ```
@@ -110,16 +110,16 @@ test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,1,Data);
 ```
 you will get an error 
 ```Index in position 3 exceeds array bounds (must not exceed 1).```
-This is because you didn't precompute enough Data for these two functions. So you must first run
+This is because you didn't precompute enough data for these two functions. So you must first run
 ```
 write_Data(NumberN,NumberM,1,LargeNumber);
 Data=load_Data;
 ```
 for a large enough ```LargeNumber``` depending on the ranges you are using.
 
-The larger the ```LargeNumber``` you select the more precomputed Data you have available and the wider the ranges you can check (in the current implementation memory usage of the precomputed Data is not an issue). Eg for ```LargeNumber=50``` your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out with ```rangeN1=rangeN2=rangeM1=rangeM2=20```
+The larger the ```LargeNumber``` you select the more precomputed data you have available and the wider the ranges you can check (in the current implementation, memory usage of ```Data``` is not an issue). Eg for ```LargeNumber=50``` your available range includes at least ```rangeN1=rangeN2=rangeM1=rangeM2=10``` but errors out at ```rangeN1=rangeN2=rangeM1=rangeM2=20```
 
-## How about even faster ?
+## How about even faster?
 
 - Try using the parallel processing package ([Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
 
