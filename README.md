@@ -9,11 +9,11 @@ All you need is a version of MATLAB.
  If you are associated with a University you might be able to get a free academic MATLAB license through your institution.
  At some point the project might be ported to C++ for wider availability and speed, but for now the code is in MATLAB
 
-## How do I compute the C4 homology of a point with your program?
+## How do I compute the C4 homology of a point?
 Download the repository and add it to your MATLAB path. Then type the following in the command line:
 
 ```
-write_Data(1,1,1);
+write_Data(1,1,1,1);
 load_Data;
 test_Pure_Homology(8,7,0,Data);
 ```
@@ -53,8 +53,22 @@ test_Lambda_Minus_Sigma(rangeN,rangeM,0,Data);
 
 ## But what about the multiplicative structure?
 
-To be added once it's user friendly enough
+Run
+```
+test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
+```
+The range variables specify the sets that the exponents of the Euler and orientation classes ```asigma, u2sigma,usigma,alambda,ulambda``` are allowed to range in.
 
+This command does three things:
+
+- Computes the product of these Euler and orientation classes and checks if it's a generator
+
+- checks if the generator is also in our tables, giving out an error if there is a mismatch and
+
+- prints the answer in the form 
+```Generator verified: NameOfGenerator```
+where NameOfGenerator can for example be
+```asigma^2*alambda^3```
 
 ## The program runs too slowly for large ranges
 
