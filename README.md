@@ -14,7 +14,7 @@ Download the repository and add it to your MATLAB path. Then type the following 
 
 ```
 write_Data(1,1,1,1);
-load_Data;
+Data=load_Data;
 test_Pure_Homology(8,7,0,Data);
 ```
 
@@ -94,7 +94,7 @@ Significant speed improvements can be achieved by using precomputed Data so as t
 
 ```
 write_Data(NumberN,NumberM,1,1);
-load_Data;
+Data=load_Data;
 ```
 where ```NumberN, NumberM``` must be at least  ```rangeN, rangeM``` respectively (pick the large enough to accomodate any ```rangeN, rangeM``` you may decide to check later).
 
@@ -113,7 +113,7 @@ you will get an error
 This is because you didn't precompute enough Data for these two functions. So you must first run
 ```
 write_Data(NumberN,NumberM,1,LargeNumber);
-load_Data;
+Data=load_Data;
 ```
 for a large enough ```LargeNumber``` depending on the ranges you are using.
 
