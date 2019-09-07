@@ -63,15 +63,15 @@ This command does three things:
 
 - Computes the product of these Euler and orientation classes and checks if it's a generator
 
-- checks if the generator is also in our tables, giving out an error if there is a mismatch and
+- Checks if the generator is also in our tables, sending out an error if not and
 
-- prints the answer in a variable form depending on the generator, that can look like
+- Prints the answer in a form that looks like
 
 ```
 Top Generator verified: asigma^2*alambda^3
 ```
 
-or
+or like
 
 ```
 Mid Generator verified: usigma^4*bar(ulambda^2)
