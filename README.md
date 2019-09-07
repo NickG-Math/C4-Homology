@@ -115,12 +115,11 @@ This is because you didn't precompute enough Data. So you must first run
 write_Data(NumberN,NumberM,1,LargeNumber);
 load_Data;
 ```
-for a large enough LargeNumber depending on the ranges you are using.
+for a large enough LargeNumber depending on the ranges you are using. The higher the LargeNumber you select, the larger ranges you can check with precomputed Data, but the more memory the ```Data``` variable consumes. Eg for LargeNumber=50, ```Data``` consumes 1.1GB of RAM and your available range includes rangeN1=rangeN2=rangeM1=rangeM2=10
 
+## Any other way to squeeze even more speed of it ?
 
-Two other performance notes:
-
-- If you are still not satisfied with runtime speed, you can use the parallel processing package (see the corresponding page in the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
+- Try using the parallel processing package ([Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
 
 - If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. So you should change the default BLAS (Basic Linear Algebra Subprograms) MATLAB uses to an open source one like OpenBLAS (I am not sure if this is possible with MATLAB; I believe it is with Octave but I have not tested it).
 
