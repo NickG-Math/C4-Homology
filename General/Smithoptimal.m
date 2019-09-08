@@ -1,9 +1,5 @@
 function [A,varargout] = Smithoptimal(A,wantP,wantQ)
 
-%global ALLOURMATRICES  This is to capture all matrices in Smith. Used to
-%optimize Smith
-%ALLOURMATRICES{end+1}=A;
-
 [M,N] = size(A);
 L=min(M,N);
 if wantP
@@ -94,11 +90,3 @@ elseif wantQ
 end
 
 end
-
-% for i=1:M
-%     for j=1:N
-%         if i~=j && A(i,j)~=0
-%             error('Not diagonal')
-%         end
-%     end
-% end
