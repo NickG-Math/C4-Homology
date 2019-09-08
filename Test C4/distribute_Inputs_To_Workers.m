@@ -8,8 +8,6 @@ for i=1:12 %Slightly increase the range of n so that we can assign equal load to
         total=rangeN*rangeM;
     end
 end
-sprintf('Range is n=%d and m=%d',rangeN,rangeM)
-
 [n,m]=ind2sub([rangeN,rangeM],1:total);
 weight=n+2.^m;
 [~,I]=sort(weight);

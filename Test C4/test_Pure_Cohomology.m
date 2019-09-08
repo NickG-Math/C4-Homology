@@ -3,7 +3,7 @@ function test_Pure_Cohomology(rangeN,rangeM,useData,Data)
 for n=-rangeN:0
     for m=-rangeM:0
         for k=-abs(n)-abs(2*m):0
-            [~,~,~,~,~,Answer]=C4Mackey(k,n,m,useData,Data);
+            Answer=C4Mackey(k,n,m,useData,Data);
             found=0;
             
             if k==0 && n==0 && m==0

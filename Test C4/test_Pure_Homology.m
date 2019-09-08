@@ -4,7 +4,7 @@ function test_Pure_Homology(rangeN,rangeM,useData,Data)
 for n=0:rangeN
     for m=0:rangeM
         for k=0:n+2*m
-            [~,~,~,~,~,Answer]=C4Mackey(k,n,m,useData,Data);
+            Answer=C4Mackey(k,n,m,useData,Data);
             found=0;
             if k==n+2*m && mod(n,2)==0
                 if isequal(Answer,"Z")

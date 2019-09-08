@@ -1,9 +1,15 @@
 function [rank,D]=C4allChains(n,m,useData,Data)
+%Inputs: ints n,m, logical useData, struct Data
+%Outputs: cell of cells of arrays rank and cell of cells of matrices D
+%Description: rank{1},rank{2},rank{4} and D{1},D{2},D{4} are the ranks
+%and differentials on each level, with 1 being bottom. 
+
 
 rank=cell(1,4); D=cell(1,4);
-if useData
+%First compute the bottom level. This might need boxing
+if useData %Use the standard chains stored in Data
     if n*m>=0
-        rank{1}=Data.rankStandard{sign(n)+2,sign(m)+2,abs(n)+1,abs(m)+1};
+        rank{1}=Data.rankStandard{sign(n)+2,sign(m)+2,abs(n)+1,abs(m)+1}; %Remember our indexing changes
         D{1}=Data.ChainsStandard{sign(n)+2,sign(m)+2,abs(n)+1,abs(m)+1};
     else
         rankCsigma=Data.rankStandard{sign(n)+2,2,abs(n)+1,1}; %Load S^{nsigma}
@@ -13,7 +19,7 @@ if useData
       %  [rank{1},~,D{1}]=Box(rankClambda,rankCsigma,Clambda,Csigma,useData,Data); %One way of doing it
         [rank{1},~,D{1}]=Box(rankCsigma,rankClambda,Csigma,Clambda,useData,Data); %The other way of doing it
     end
-else
+else  %Don't use the standard chains stored in Data
     if n*m>=0
         [rank{1},D{1}]=C4standard(n,m);
     else
@@ -23,6 +29,8 @@ else
        % [rank{1},~,D{1}]=Box(rankCsigma,rankClambda,Csigma,Clambda,useData,Data); %The other way of doing it
     end
 end
+
+%Now transfer
 
 for level=[2,4]
     D{level}=cell(1,abs(n)+2*abs(m)+2);

@@ -3,7 +3,7 @@ function test_Sigma_Minus_Lambda(rangeN,rangeM,useData,Data)
 for n=1:2:rangeN
     for m=1:rangeM
         for k=-2*m:n
-            [~,~,~,~,~,Answer]=C4Mackey(k,n,-m,useData,Data);
+            Answer=C4Mackey(k,n,-m,useData,Data);
             found=0;
             if  (n-2*m<k && k<=n-4 && mod(k,2)==1) || (0<=k && k<n-2*m && mod(k,2)==0)
                 if isequal(Answer,"Z/2")
@@ -82,7 +82,7 @@ end
 for n=2:2:rangeN
     for m=1:rangeM
         for k=-2*m:n
-            [~,~,~,~,~,Answer]=C4Mackey(k,n,-m,useData,Data);
+            Answer=C4Mackey(k,n,-m,useData,Data);
             found=0;
             if 0<=k && k<=n-4 && mod(k,2)==0 && k~=n-2*m
                 if isequal(Answer,"Z/2")

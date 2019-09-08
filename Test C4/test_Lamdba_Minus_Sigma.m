@@ -3,7 +3,7 @@ function test_Lamdba_Minus_Sigma(rangeN,rangeM,useData,Data)
 for n=2:2:rangeN
     for m=1:rangeM
         for k=-n:2*m
-            [~,~,~,~,~,Answer]=C4Mackey(k,-n,m,useData,Data);
+            Answer=C4Mackey(k,-n,m,useData,Data);
             found=0;
             if k==-n+2*m
                 if isequal(Answer,"Z")
@@ -57,7 +57,7 @@ end
 for n=1:2:rangeN
     for m=1:rangeM
         for k=-n:2*m
-            [~,~,~,~,~,Answer]=C4Mackey(k,-n,m,useData,Data);
+            Answer=C4Mackey(k,-n,m,useData,Data);
             found=0;
             if k==-n+2*m && k>=-1
                 if isequal(Answer,"Z_-")
