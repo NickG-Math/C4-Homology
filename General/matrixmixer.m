@@ -1,14 +1,17 @@
-function mixed=matrixmixer(L,R)   %Makes L{1} then R{1} directly below, then L{2} directly to the right of R{1} then R{2}...
-% lengthL=size(L,2);  %L,R must be cell arrays
-% lengthR=size(R,2);
-% if lengthL~=lengthR
-%     error('the Left and Right cells are not equal in length')
-% end
+function mixed=matrixmixer(L,R)  
+%Inputs: Cells of matrices L,R
+%Outputs: Matrix mixed
+%Description: mixed mixes L,R as follows: First we have L{1}, then R{1} directly below, then L{2} directly to the right of R{1} then R{2} directly below of L{2}...
+
 emptyL=cellfun('isempty',L);
 emptyR=cellfun('isempty',R);
 emptyLandR=emptyL & emptyR;
 L(emptyLandR)=[];
 R(emptyLandR)=[];
+
+%This clears the common empty values that are really not needed for
+%anything and can cause problems
+
 
 if isempty(L) 
     mixed=[];
@@ -16,6 +19,9 @@ if isempty(L)
 end
     
 length=size(L,2);
+
+%We track where to put the matrices L,R. This is used for preallocation.
+
 
 trackvert=zeros(1,length+2);
 trackhor=zeros(1,length+1);
