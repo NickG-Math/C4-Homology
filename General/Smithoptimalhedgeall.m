@@ -1,8 +1,11 @@
 function [A,P,Q,Pi,Qi]= Smithoptimalhedgeall(A,wantP,wantQ,wantPi,wantQi) 
-%This Smith is faster than the Smithoptimal if we are lucky to find the min
-%value as soon as we start. Hence the "hedge". 
-%For random matrices it's much slower, but for our matrices it's actually
-%quite a bit faster!
+%Inputs: Matrix A and logical wantP,wantQ,wantPi,wantQi
+%Outputs: Matrices A,P,Q,Pi,Qi
+%Description: The outputA is the Smith normal form of the inputA. 
+%If all want? variables are 1, we have outputA=P*inputA*Q and inputA=Pi*outputA*Qi
+%and P,Q,Pi,Qi are invertible matrices with Pi=inv(P) and Qi=inv(Q) 
+%If a want? variable is 0 then the corresponding ? is [] and should NOT be used in any calculations.
+
 [M,N] = size(A);
 L=min(M,N);
 if wantP
@@ -29,10 +32,10 @@ end
 
 
 
-
+%start indicates which row or column we are eliminating
 for start=1:L
-    i=start+1;
-    j=start+1;    
+    i=start+1; %i goes through the elements on the column after start and only increases once an element is eliminated to 0. So if i>M then the whole column has been eliminated
+    j=start+1; %j is the same but for rows   
     while (i<=M || j<=N) && (any(A(start+1:end,start)) || any(A(start,start+1:end)))  %If the first row or column are not identically zero
         while i<=M && any(A(start+1:end,start)) %First we do the column
             if A(start,start)==0 %If the first term is zero, exchange it with the first nonzero
@@ -45,13 +48,13 @@ for start=1:L
                     Pi(:,[start,q])=Pi(:,[q,start]);
                 end
 
-                j=start+1;
+                j=start+1;%Exchanging columns means we mess up our rows, so we need to set j back to the start. Ideally this won't happen much
                 i=q+1;
             else %If first term is nonzero
                 if A(i,start)==0
                     i=i+1;
                 else
-                    if mod(A(i,start),A(start,start))==0 %hedge our bets that this will be first
+                    if mod(A(i,start),A(start,start))==0 %Eliminate
                         thequotient=A(i,start)/A(start,start);
                         A(i,:)=A(i,:)-thequotient*A(start,:);
                         if wantP
@@ -62,7 +65,7 @@ for start=1:L
                         end
 
                         i=i+1;
-                    elseif mod(A(start,start),A(i,start))==0  %hedge our bets that this will be second
+                    elseif mod(A(start,start),A(i,start))==0  %Swap then eliminate
                         A([start,i],:)=A([i,start],:);
                         thequotient=A(i,start)/A(start,start);
                         A(i,:)=A(i,:)-thequotient*A(start,:);
@@ -77,7 +80,7 @@ for start=1:L
 
                         i=i+1;
                         j=start+1;
-                    else %If none divides the other we get a remainder, which is bad.
+                    else %If none divides the other we get a remainder after eliminating, so we need to swap again.
                         thequotient=floor(A(i,start)/A(start,start));
                         A(i,:)=A(i,:)-thequotient*A(start,:);
                         A([start,i],:)=A([i,start],:);
@@ -95,7 +98,7 @@ for start=1:L
                 end
             end
         end
-        %We do the row.
+        %The same logic applies to the working the row
         while j<=N && any(A(start,start+1:end))
             if A(start,start)==0
                 q=find(A(start,start+1:end),1)+start;

@@ -1,4 +1,9 @@
 function [A,varargout] = Smithoptimal(A,wantP,wantQ)
+%Inputs: Matrix A and logical wantP and wantQ
+%Outputs: Matrix A 
+%Optional outputs: Matrices P,Q if wantP,wantQ are 1 respectively.
+%Description: The output is the Smith normal form of the input and
+%outputA=P*inputA*Q and P,Q are invertible matrices.
 
 [M,N] = size(A);
 L=min(M,N);
@@ -11,9 +16,12 @@ end
 
 start=1;
 while start<=L
-    %It's actually faster NOT to check if A is 0 in the range here
-    %Find the minimum element of A in absolute value
+    %Start indicates which row and column we are eliminating here.
+    %So as start increases A becomes more and more diagonal as the inner
+    %rows and columns are getting eliminated
     
+    %We find the minimum element of A in absolute value
+
     minim=abs(A(start,start));
     s=start;
     t=start;
@@ -47,10 +55,8 @@ while start<=L
         end
     end
     
-    %See if A(start,start) divides everything, otherwise add to the first
-    %column
-    
-    %Eliminate using A(start,start)
+    %Eliminate row=start and column=start using A(start,start) as much as
+    %possible
     
     for i=start+1:M
         if A(i,start)~=0
@@ -71,13 +77,13 @@ while start<=L
         end
     end
     
-    %It's actually faster not switching with a remainder as soon as we see it, as there may be a smaller remainder
-    %later.
-    
     %If rows and columns are 0 proceed to next iteration
     if ~any(A(start+1:end,start)) && ~any(A(start,start+1:end))
         start=start+1;
     end
+    
+    %Otherwise we do the iteration with the same start.
+
 end
 
 if wantP && wantQ
