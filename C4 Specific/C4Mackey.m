@@ -17,15 +17,27 @@ if k<0 || k>abs(n)+2*abs(m) %Empty chain complexes in that range
     return
 end
 
-[rank,D0]=C4Diff(k,n,m,useData,Data); %The rank at k and differential exiting k
-[~,D1]=C4Diff(k+1,n,m,useData,Data); %The differential entering k
+%rank is the rank of the chains at k, D0 is the exiting differential and D1 the entering
+%We will transfer them to all levels 1,2,4 so preallocate now:
+rank=cell(1,4); D0=cell(1,4); D1=cell(1,4);
+
+[rank{1},rankRan,D0{1}]=C4Diff(k,n,m,useData,Data); %The rank at k, at k-1 and the differential exiting k
+[rankDom,~,D1{1}]=C4Diff(k+1,n,m,useData,Data); %The rank at k+1 and the differential exiting k
+%We need the extra two ranks to transfer the differentials
+
+%We transfer the differentials and the rank at k (no point transferring the other two ranks)
+for level=[2,4]
+    rank{level}=ranktransfer(rank{level/2},level/2);
+    D0{level}=transferdifferential(D0{1},4/level,rank{1},rankRan);
+    D1{level}=transferdifferential(D1{1},4/level,rankDom,rank{1});
+end
 
 SmithVariables=cell(1,4);
 for level=[1,2,4] %Get the Smithvariables now for transfers/restrictions/action
     [Gen{level},Homol{level},SmithVariables{level}]=Homology(D1{level},D0{level}); %Compute the homology
 end
 
-%Now we compute transfers/restrictions/actions
+%Now we compute transfers/restrictions/actions. First preallocate
 
 Tr{2}=[]; Tr{4}=[];
 Res{2}=[]; Res{4}=[];
