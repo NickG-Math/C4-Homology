@@ -67,10 +67,23 @@ elseif size(HD{level},2)>1
     end
 end
 
-%Box at the bottom (you can only box there)
-Boxed=cell(1,4); totalrank=cell(1,4);
-[totalrank{1},detailedrank{1},Boxed{1}]=Box(rankC{1},rankD{1},C{1},D{1},useData,Data); 
-%We need the detailedrank so as to pad appropriately. See below
+%In the product we are interested at index k1+k2. So we have two
+%differentials D0,D1 and we need to transfer them so we also need 
+%the ranks at k1+k2-1, k1+k2 and k1+k2+1. We call these low, mid, high
+%resp. 
+
+totalrankMid=cell(1,4); %We will only transfer this totalrankMid
+
+totalrankLow=rankBox(k1+k2-1,rankC{1},rankD{1}); %Needed to transfer D0 
+[totalrankMid{1},detailedrankMid]=rankBox(k1+k2,rankC{1},rankD{1}); %Where our generator lives. We need the detailedrank so as to pad appropriately. See below
+totalrankHigh=rankBox(k1+k2+1,rankC{1},rankD{1}); %Needed to transfer D1 
+
+
+D0{1}=BoxDiff(k1+k2,rankC{1},rankD{1},C{1},D{1},useData,Data); %Exiting Differential at k1+k2
+D1{1}=BoxDiff(k1+k2+1,rankC{1},rankD{1},C{1},D{1},useData,Data); %Entering Differential at k1+k2
+
+%Now we restrict our generators to the bottom, take the products of the restrictions and
+%finally invert restrictions so as to get the product at the correct level
 
 %Restrict our generators to the bottom, so as to be able to multiply them (we can only multiply in the equivariant bases there)
 l=level;
@@ -85,11 +98,11 @@ end
 
 padleft=0;
 for j=0:k1-1  
-    padleft=padleft+sum(detailedrank{1}{k1+k2+1}{j+1});
+    padleft=padleft+sum(detailedrankMid{j+1});
 end
 padright=0;
 for j=k1+1:k1+k2
-    padright=padright+sum(detailedrank{1}{k1+k2+1}{j+1});
+    padright=padright+sum(detailedrankMid{j+1});
 end
 
 %The product on the bottom in the left convenient basis
@@ -107,25 +120,21 @@ product{1}=[zeros(padleft,1);productcanon;zeros(padright,1)];
 %This is the product of the restrictions on the bottom level
 
 
-%Now transfer the chains upstairs (no need to transfer the detailedrank, that's only for padding). 
-%We don't transfer the product, rather use the inverse of restriction as we want to get the product, not a multiple of it (transfer of restriction). 
-%Remember l was used to go from level to 1. Now we do the opposite
+%Invert restrictions. Remember l was used to go from level to 1. Now we do the opposite
 
-Boxed{level}=cell(1,k1+k2+2);
-for i=[k1+k2+1,k1+k2+2] %Only transfer the differential where we need it
-    if i>1
-        Boxed{level}{i}=transferdifferential(Boxed{1}{i},4/level,totalrank{1}{i},totalrank{1}{i-1});
-    end
-end
-
-        
 while l<level
-    totalrank{2*l}{k1+k2+1}=ranktransfer(totalrank{l}{k1+k2+1},l);
-    product{2*l}=invres(product{l},totalrank{l}{k1+k2+1},l);
+    totalrankMid{2*l}=ranktransfer(totalrankMid{l},l);
+    product{2*l}=invres(product{l},totalrankMid{l},l);
     l=2*l;
 end
 
-[~,Homologyatproduct,SmithVariables]=Homology(Boxed{level}{k1+k2+2},Boxed{level}{k1+k2+1});
+%Now transfer the chains upstairs (no need to transfer the detailedrank, that's only for padding). 
+%We don't transfer the product, rather use the inverse of restriction as we want to get the product, not a multiple of it (transfer of restriction). 
+
+D0{level}=transferdifferential(D0{1},4/level,totalrankMid{1},totalrankLow);
+D1{level}=transferdifferential(D1{1},4/level,totalrankHigh,totalrankMid{1});
+
+[~,Homologyatproduct,SmithVariables]=Homology(D1{level},D0{level});
 q=Homologyelement(product(level),SmithVariables);
 basis=q{1};
 

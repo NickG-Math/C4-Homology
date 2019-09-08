@@ -17,10 +17,12 @@ if k<0 || k>abs(n)+2*abs(m) %Empty chain complexes in that range
     return
 end
 
-[rank,D]=C4allChains(n,m,useData,Data);
+[rank,D0]=C4Diff(k,n,m,useData,Data); %The rank at k and differential exiting k
+[~,D1]=C4Diff(k+1,n,m,useData,Data); %The differential entering k
+
 SmithVariables=cell(1,4);
 for level=[1,2,4] %Get the Smithvariables now for transfers/restrictions/action
-    [Gen{level},Homol{level},SmithVariables{level}]=Homology(D{level}{k+2},D{level}{k+1}); %Compute the homology
+    [Gen{level},Homol{level},SmithVariables{level}]=Homology(D1{level},D0{level}); %Compute the homology
 end
 
 %Now we compute transfers/restrictions/actions
@@ -38,16 +40,16 @@ for level=[1,2,4]
         actioned=cell(1,size(Gen{level},2));
         
         for i=1:size(Gen{domres},2)
-            restricted{i}=restrict(Gen{domres}(:,i),rank{domres}{k+1},rank{level}{k+1}); %Restrict the i-th generator
+            restricted{i}=restrict(Gen{domres}(:,i),rank{domres},rank{level}); %Restrict the i-th generator
         end
         for i=1:size(Gen{level},2)
-            actioned{i}=action(Gen{level}(:,i),rank{level}{k+1}); %Find the action on the i-th generator
+            actioned{i}=action(Gen{level}(:,i),rank{level}); %Find the action on the i-th generator
         end
     end
     if level~=1
         transferred=cell(1,size(Gen{domtr},2));
         for i=1:size(Gen{domtr},2)
-            transferred{i}=transfergenerator(Gen{domtr}(:,i),rank{domtr}{k+1},rank{level}{k+1});  %Transfer the i-th generator
+            transferred{i}=transfergenerator(Gen{domtr}(:,i),rank{domtr},rank{level});  %Transfer the i-th generator
         end
     end
     
