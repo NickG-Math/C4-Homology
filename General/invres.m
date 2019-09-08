@@ -1,4 +1,8 @@
-function top=invres(bottom,rankbottom,level) %The inverse of restriction (for free Mackey functors). Given bottom at level return top one level higher with Res(top)=bottom (assuming that bottom is in the image of the Res)
+function top=invres(bottom,rankbottom,level)
+%Inputs: Column bottom, array rankbottom and int level
+%Outputs: Column top
+%The inverse of restriction (for free Mackey functors). Given bottom at level return top one level higher with Res(top)=bottom (assuming that bottom is in the image of the Res)
+%Sloppy code but it's used so so rarely that it really has no performance impact.
 top=[];
 trackhor=0;
 transferlevel=2*level;
