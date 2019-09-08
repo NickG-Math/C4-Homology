@@ -11,14 +11,19 @@ t=size(D,2)-2; %From D_0 to D_t and differentials D{1}:D_0->0 to D{t+1}:D_s->D_{
 
 totalrank=cell(1,s+t+2); rank=cell(1,s+t+2); Boxed=cell(1,s+t+2);
 
-%We go from 0 to s+t
-for i=0:s+t %We compute the left&right differentials out (C box D)_i and the ranks
+%The first differential is always empty so we only need to compute the
+%ranks. Saves a miniscule amount of time
+%(C box D)_0=C_0 box D_0
+rank{1}{1}=rankmult(rankC{1},rankD{1});
+totalrank{1}=rank{1}{1};
+
+%Now we do ranks and differentials. 
+for i=1:s+t %We compute the left&right differentials out (C box D)_i and the ranks
     rank{i+1}=cell(1,i+1); LeftDiff=cell(1,i+1); RightDiff=cell(1,i+1);
     
     for j=max(0,i-t):min(i,s) %(C box D)_i=C_0 box D_i + ... + C_j box D_{i-j} + ... + C_i box D_0. We work with one summand j at a time
         
         rank{i+1}{j+1}=rankmult(rankC{j+1},rankD{i-j+1}); %The rank of C_j box D_{i-j} in matrix form
-        
         
         %We make special provisions if one of C_j or D_{i-j} is Z. In that case some change of basis matrices below are guaranteed to be identities, 
         %so we are saving time by not multiplying with identity matrices. Ultimately all these if/else statements can be removed (keeping only the if part), at the cost of speed.
