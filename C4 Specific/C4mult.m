@@ -1,9 +1,25 @@
-function [basis,varargout]=C4mult(level,first,second,useData,Data,varargin)  %varargin is used if there are multiple generates at level
-%varargout is simplified basis (see the end), homology, generators resp.
+function [basis,normalizedBasis]=C4mult(level,first,second,useData,Data,varargin) 
+%Inputs: int level, arrays of first, second, logical useData, struct Data
+%Optional inputs: array=varargin{1}
+%Outputs: arrays basis and normalizedBasis
+
+%Description: Computes the generator GC in coordinates of first=(k1,n1,m1) on the given level.
+%Same for GD and second=(k2,n2,m2). The level is the same for both so we can multiply.
+%So then we take the product GC*GD and write it as a linear combination of generators and
+%store the coefficients in basis.
+%The normalizedBasis is equal to the basis modulo signs.
+
+%If there are multiple generators in the coordinates of GC (non cyclic answer) we specify
+%which generator we want through varargin{1}=[x,0] where x is the index of the generator in our list of generators 
+
+%Similarly if we have multiple generators at GD we specify them via
+%varargin{2}=[0,y]. Finally if there are multiple generators at both GC
+%and GD then we use varargin{1}=[x,y]
+
 
 if isequal(first,zeros(1,3)) || isequal(second,zeros(1,3)) %We multiply with [0,0,0] i.e. 1. No point in any more computations
     basis=1;
-    varargout{1}=1;
+    normalizedBasis=1;
     return
 end
     
@@ -12,13 +28,14 @@ k1=first(1); n1=first(2); m1=first(3); k2=second(1); n2=second(2); m2=second(3);
 %First we get our chains
 [rankC,C]=C4allChains(n1,m1,useData,Data);
 [rankD,D]=C4allChains(n2,m2,useData,Data);
+%Reindex appropriately
 k1=C4kreindex(k1,n1,m1);
 k2=C4kreindex(k2,n2,m2);
 
 %Basic check
 if k1<0 || k1>abs(n1)+2*abs(m1) || k2<0 || k2>abs(n2)+2*abs(m2)
     basis=[];
-    varargout{1}=[];
+    normalizedBasis=[];
     return
 end
 
@@ -26,12 +43,12 @@ end
 [GC{level},HC{level}]=Homology(C{level}{k1+2},C{level}{k1+1});
 if isequal(HC{level},0)
     basis=[];
-    varargout{1}=[];
+    normalizedBasis=[];
     return
 elseif size(HC{level},2)>1  %If multiple generators, use varargin to decide which to use
-    if isempty(varargin) || size(varargin{1},2)==0
+    if isempty(varargin)
         disp(HC{level})
-        error('Please enter which generator x of the above you want as [x,0]')
+        error('Please enter which generator x of the above you want as [x,0] where x=1 if it is the first option etc. ')
     else
         GC{level}=GC{level}(:,varargin{1}(1));
     end
@@ -39,37 +56,35 @@ end
 [GD{level},HD{level}]=Homology(D{level}{k2+2},D{level}{k2+1});
 if isequal(HD{level},0)
     basis=[];
-    varargout{1}=[];
+    normalizedBasis=[];
     return
 elseif size(HD{level},2)>1
-    if isempty(varargin) || size(varargin{1},2)==1
+    if isempty(varargin)
         disp(HD{level})
-        error('Please enter which generator of the above you want as [0,y]')
+        error('Please enter which generator of the above you want as [0,y] where y=1 if it is the first option etc.')
     else
         GD{level}=GD{level}(:,varargin{1}(2));
     end
 end
 
-%Box at the bottom (you can only box downstairs!!)
+%Box at the bottom (you can only box there)
 Boxed=cell(1,4); totalrank=cell(1,4);
-
 [totalrank{1},detailedrank{1},Boxed{1}]=Box(rankC{1},rankD{1},C{1},D{1},useData,Data); 
+%We need the detailedrank so as to pad appropriately. See below
 
-
-%Restrict our generators to the bottom, so as to be able to multiply them (only multiply downstairs!!)
-if level==4
-    GC{2}=restrict(GC{4},rankC{4}{k1+1},rankC{2}{k1+1});
-    GD{2}=restrict(GD{4},rankD{4}{k2+1},rankD{2}{k2+1});
-end
-if level>=2
-    GC{1}=restrict(GC{2},rankC{2}{k1+1},rankC{1}{k1+1});
-    GD{1}=restrict(GD{2},rankD{2}{k2+1},rankD{1}{k2+1});
+%Restrict our generators to the bottom, so as to be able to multiply them (we can only multiply in the equivariant bases there)
+l=level;
+while l>1
+    GC{l/2}=restrict(GC{l},rankC{l}{k1+1},rankC{l/2}{k1+1});
+    GD{l/2}=restrict(GD{l},rankD{l}{k2+1},rankD{l/2}{k2+1});
+    l=l/2;
 end
     
-%Now multiply on the bottom. To do that we need to pad left and right by zeros
+%Now multiply on the bottom. To do that we need to pad left and right by
+%zeros (think about how the tensor of chain complexes works)
 
 padleft=0;
-for j=0:k1-1  %If the j corresponds to [] in rank, then sum=0 so we are good!
+for j=0:k1-1  
     padleft=padleft+sum(detailedrank{1}{k1+k2+1}{j+1});
 end
 padright=0;
@@ -79,7 +94,8 @@ end
 
 %The product on the bottom in the left convenient basis
 leftconvproduct=GC{1}.*GD{1}(:)'; 
-leftconvproduct=leftconvproduct(:);  %We multiply the GC{1} with each entry of GD{1} and then concatenate vertically.
+leftconvproduct=leftconvproduct(:);  
+%I.e. multiply the GC{1} with each entry of GD{1} and then concatenate vertically.
 
 
 %Then we change the basis
@@ -88,46 +104,34 @@ productcanon=convlefttocanon*leftconvproduct;
 %Finally we pad it
 product=cell(1,4);
 product{1}=[zeros(padleft,1);productcanon;zeros(padright,1)];
+%This is the product of the restrictions on the bottom level
 
 
+%Now transfer the chains upstairs (no need to transfer the detailedrank, that's only for padding). 
+%We don't transfer the product, rather use the inverse of restriction as we want to get the product, not a multiple of it (transfer of restriction). 
+%Remember l was used to go from level to 1. Now we do the opposite
 
-%Now transfer upstairs (no need to transfer the detailedrank, that's only for padding). 
-%We don't transfer the product, rather use the inverse of restriction as we want to get the product, not a multiple of it. 
-for l=[2,4]
-    Boxed{l}=cell(1,k1+k2+2);
-    totalrank{l}=cell(1,k1+k2+2); %We only really need to transfer at k1+k2+1 and k1+k2+2, so we'll just stop there
-    for i=[k1+k2+1,k1+k2+2]
-        domain=totalrank{1}{i};
-        if i==1
-            range=0;
-        else
-            range=totalrank{1}{i-1};
-        end
-        Boxed{l}{i}=transferdifferential(Boxed{1}{i},4/l,domain,range);
-        totalrank{l}{i}=ranktransfer(totalrank{l/2}{i},l/2);
+Boxed{level}=cell(1,k1+k2+2);
+for i=[k1+k2+1,k1+k2+2] %Only transfer the differential where we need it
+    if i>1
+        Boxed{level}{i}=transferdifferential(Boxed{1}{i},4/level,totalrank{1}{i},totalrank{1}{i-1});
     end
-    product{l}=invres(product{l/2},totalrank{l/2}{k1+k2+1},l/2);
 end
 
-[Generatoratproduct,Homologyatproduct,SmithVariables]=Homology(Boxed{level}{k1+k2+2},Boxed{level}{k1+k2+1});
+        
+while l<level
+    totalrank{2*l}{k1+k2+1}=ranktransfer(totalrank{l}{k1+k2+1},l);
+    product{2*l}=invres(product{l},totalrank{l}{k1+k2+1},l);
+    l=2*l;
+end
+
+[~,Homologyatproduct,SmithVariables]=Homology(Boxed{level}{k1+k2+2},Boxed{level}{k1+k2+1});
 q=Homologyelement(product(level),SmithVariables);
 basis=q{1};
 
-%For varargout{1} we output the simplified basis, where are allowed to
-%rechoose the generator so as to get the answer to be 0,1,2 for Z/4 etc.
-%So it's true only up to signs
-
-varargout{1}=abs(basis);
+%We normalize the basis
+normalizedBasis=abs(basis);
 if isequal(Homologyatproduct,4) && basis==3
-    varargout{1}=1;
+    normalizedBasis=1;
 end
-varargout{2}{1}=HC{level};
-varargout{2}{2}=HD{level};
-varargout{2}{3}=Homologyatproduct;
-
-varargout{3}{1}=GC{level};
-varargout{3}{2}=GD{level};
-varargout{3}{3}=Generatoratproduct;
-
-
 end
