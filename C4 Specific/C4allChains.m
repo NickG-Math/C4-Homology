@@ -37,7 +37,9 @@ for level=[2,4]
     rank{level}=cell(1,abs(n)+2*abs(m)+2);
     for i=1:abs(n)+2*abs(m)+2    
         rank{level}{i}=ranktransfer(rank{level/2}{i},level/2);
-        D{level}{1}=0;
+        if n*m>=0
+            D{level}{1}=0; %Only useful in the extreme case that we get 0->Z->0 and that needs to transfer correctly to get H_0S^0=Z.
+        end
         if i>1
             D{level}{i}=transferdifferential(D{1}{i},4/level,rank{1}{i},rank{1}{i-1});
         end
