@@ -1,8 +1,7 @@
-function [res]=restrict(A,dom,ran)  %Restricts down one level always. 
-
-if size(A,2)>1
-    error('You can only restrict column vectors')
-end
+function [res]=restrict(A,dom,ran) 
+%Inputs: Column A, arrays dom and ran
+%Outputs: Column res
+%Restricts element A one level down. The dom and ran are the ranks of the two levels. 
 
 res=zeros(sum(ran),1);
 
@@ -15,7 +14,7 @@ for i=1:size(dom,2)
     elseif ran(i)==dom(i)
         res(trackran+1:trackran+dom(i))=A(trackdom+1:trackdom+dom(i));
     else %The range should be either equal to the domain or twice that
-        error('Restriction only transfers one level')
+        error('Domain or range provided for transfer is wrong')
     end
     trackdom=trackdom+dom(i);
     trackran=trackran+ran(i);
