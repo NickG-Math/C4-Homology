@@ -1,9 +1,7 @@
-function transfer=transfergenerator(A,dom,ran) %Tramsfers one level higher
-
-if size(A,2)>1
-    error('You can only transfer column vectors')
-end
-
+function transfer=transfergenerator(A,dom,ran) 
+%Inputs: Column A, arrays dom and ran
+%Outputs: Column transfer
+%Transfers element A one level up. The dom and ran are the ranks of the two levels. 
 transfer=zeros(sum(ran),1);
 
 trackdom=0;
