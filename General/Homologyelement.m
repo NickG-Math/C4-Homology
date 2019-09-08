@@ -1,6 +1,14 @@
 function element=Homologyelement(element,SmithVariables)
+%Inputs: Cell arrays element and SmithVariables
+%Outputs: Cell array element of the same size as the input element
+%Description: Takes an element in the kernel and writes it as a linear combination of generators
+%Eg outputelement=[1,2,0] means inputelement=Gen1+2*Gen2+0*Gen3 in homology
+%We can also do multiple elements at the same time, hence why we use cells
+%The only thing that's needed are the SmithVariables from the Homology function.
+%To understand how this function works please compare with the  Homology function as mostly the same steps are performed.
 
-%Q0=SmithVariables{1};
+%What the Smith variables actually mean
+
 Q0i=SmithVariables{1};
 
 zerovectors=SmithVariables{2};
@@ -9,14 +17,11 @@ modoutcompletely=SmithVariables{4};
 Homology=SmithVariables{5};
 
 for i=1:size(element,2)
-    if isempty(element) || isequal(element{i},0)  
-        continue
-    elseif isempty(P1)
+    if isempty(P1)
         element{i}=0; %If some P1 is provided empty that means Generator=Homology=0
         continue
-    end   
+    end
     
- %   element{i}=round(Q0\element{i});%Our element in terms of x,y,z,.. and the zero vectors  %Rounding is unfortunately necessary in some ranges
     element{i}=Q0i*element{i};%Our element in terms of x,y,z,.. and the zero vectors  %Rounding is unfortunately necessary in some ranges
 
     element{i}(zerovectors)=[]; %Just like the kernel
@@ -32,4 +37,5 @@ for i=1:size(element,2)
     end
     element{i}=element{i}'; %Have the element as an array, reflecting the generator
 end
+
 end
