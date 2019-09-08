@@ -1,4 +1,9 @@
-function transferred=ranktransfer(rank,originallevel) %Transfers rank on level higher. originallevel is 1 at bottom.
+function transferred=ranktransfer(rank,originallevel) 
+%Inputs: Array rank and int originallevel
+%Outputs: Array transferred
+%Description: Transfers rank on level higher. originallevel is 1 at bottom.
+%Currently works only for C4.
+
 transferlevel=2*originallevel;
 halveit=(rank>4/transferlevel);
 transferred=rank;
