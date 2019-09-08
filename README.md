@@ -127,4 +127,4 @@ The larger the ```LargeNumber``` you select the more precomputed data you have a
 
 
 
-## For more details please consult the wiki.
+## For more details please consult the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki).
