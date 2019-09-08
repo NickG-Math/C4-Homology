@@ -1,20 +1,14 @@
 function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,Data)
-%Computes the canonical and left/right convenient bases for an equivariant
-%basis and returns the change of basis matrices.
+%Inputs: Arrays rankC, rankD, logical useData and struct Data
+%Outputs: Logical matrices convlefttocanon, convrighttocanon
+%Description: Writes down the canonical and left/right convenient bases for an equivariant basis 
+%given the two ranks, and then returns the change of basis matrices.
 
-%These optimizations are now done in the Box function, so no point
-%rechecking
-% if isequal(rankC,1)
-%     convlefttocanon=eye(sum(rankD));
-%     convrighttocanon=eye(sum(rankD));
-%     return
-% end
-% if isequal(rankD,1)
-%     convlefttocanon=eye(sum(rankC));
-%     convrighttocanon=eye(sum(rankC));
-%     return
-% end
-
+%If useData=1 then use the precomputed data
+%Note: At this point we could have a try and catch block so that if we
+%haven't precomputed enough Data, the program reverts to computing everything instead
+%of haulting due to an error. The problem is that if there is no error, try
+%and catch actually incur a performance penalty.
 
 if useData
     ChangeBasis=Data.ChangeBasis; %Faster saving the variable here
@@ -23,6 +17,8 @@ if useData
     % Bit faster than [convlefttocanon,convrighttocanon]=Data.ChangeBasis{:,size(rankC,2),size(rankD,2),rankC(1),rankC(end),rankD(1),rankD(end)};
     return
 end
+
+%Otherwise actually do work
 
 
 s=size(rankC,2); %The basis for C is x_1,gx_1,...,g^{rankC(1)-1}x_1,x_2,....,g^{rankC(s)-1}x_s
@@ -41,7 +37,8 @@ for c=1:s
         i=0:size(rank,2)-1;
         j=0:rank(1)-1;
 
-        helper=2^c*3^d*5.^mod(j,rankC(c)).*7.^mod(j+i',rankD(d)); %Due to the behavior of bsxfun, we don't need 5.^repmat(mod(j,rankC(c)),1,ilimit) in the presence of the matrix given by 7^.
+        helper=2^c*3^d*5.^mod(j,rankC(c)).*7.^mod(j+i',rankD(d)); %We store the elements of the canonical basis like so; it's faster than storing them as strings like "g^ix_jg^ky_j"
+        %Due to the behavior of bsxfun, we don't need 5.^repmat(mod(j,rankC(c)),1,ilimit) in the presence of the matrix given by 7^.
         helper=helper'; helper=helper(:); 
         canonical{c,d}=helper'; %Reshape into an array so as to avoid inconsistent concatenation
         %The assembly would otherwise be canonical(1,1);canonical(2,1);... so there is no problem with reshaping right now. 
@@ -77,6 +74,8 @@ totalcanon=[helper{:}]; %Make it into a matrix.
 %I am not sure hwo to do this faster as I will need to go through a cell of
 %matrices row by row and concatenate. Not supported natively due to
 %inconsistent dimensions.
+
+%Assemble the left
 totalleft=zeros(sum(rankD),sum(rankC));  
 trackhorleft=0;
 trackvertleft=0;
@@ -88,6 +87,9 @@ for d=1:t
     trackvertleft=trackvertleft+rankD(d);
     trackhorleft=0;
 end
+
+%Assemble the right
+
 
 totalright=zeros(sum(rankC),sum(rankD));
 trackhorright=0;
@@ -101,6 +103,10 @@ for c=1:s
     trackvertright=trackvertright+rankC(c);
     trackhorright=0;
 end
+
+%Now that the canonical, leftconv and rightconv bases have been assembled,
+%compute the change of basis matrices
+
 
 convlefttocanon=changeofbasis(totalleft,totalcanon);
 convrighttocanon=changeofbasis(totalright,totalcanon);
