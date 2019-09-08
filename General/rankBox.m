@@ -1,7 +1,7 @@
 function [rank,detailedrank]=rankBox(i,rankC,rankD)
-%Inputs: int i and arrays rankC,rankD
+%Inputs: int i and cells of arrays rankC,rankD
 %Outputs: Arrays rank and detailedrank
-%Description: Compute the rank of the box product of chain complexes given their ranks. 
+%Description: Compute the rank of the box product of chain complexes given their ranks at the index i. 
 %detailedrank stores the rank of each summand in the box product separately
 %It's only used when multiplying generators (see C4mult).
 
