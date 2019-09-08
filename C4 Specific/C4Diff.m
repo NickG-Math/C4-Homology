@@ -1,7 +1,7 @@
 function [rankDom,Diff]=C4Diff(i,n,m,useData,Data)
 %Inputs: ints i,n,m, logical useData, struct Data
 %Outputs: Cell of arrays rankDom, Cell of matrices Diff
-%Description: Computes the i-th differiantial for S^{nsigma+mlambda} and
+%Description: Computes the i-th differential for S^{nsigma+mlambda} and
 %the rank of its domain at all levels. Eg Diff{2} is the diff. at level 2
 
 rankDom=cell(1,4); Diff=cell(1,4);

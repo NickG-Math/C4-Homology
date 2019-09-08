@@ -72,11 +72,11 @@ end
 %the ranks at k1+k2-1, k1+k2 and k1+k2+1. We call these low, mid, high
 %resp. 
 
-totalrankMid=cell(1,4); %We will only transfer this totalrankMid
+rankMid=cell(1,4); %We will only transfer this 
 
-totalrankLow=rankBox(k1+k2-1,rankC{1},rankD{1}); %Needed to transfer D0 
-[totalrankMid{1},detailedrankMid]=rankBox(k1+k2,rankC{1},rankD{1}); %Where our generator lives. We need the detailedrank so as to pad appropriately. See below
-totalrankHigh=rankBox(k1+k2+1,rankC{1},rankD{1}); %Needed to transfer D1 
+rankLow=rankBox(k1+k2-1,rankC{1},rankD{1}); %Needed to transfer D0 
+[rankMid{1},detailedrankMid]=rankBox(k1+k2,rankC{1},rankD{1}); %Where our generator lives. We need the detailedrank so as to pad appropriately. See below
+rankHigh=rankBox(k1+k2+1,rankC{1},rankD{1}); %Needed to transfer D1 
 
 
 D0{1}=BoxDiff(k1+k2,rankC{1},rankD{1},C{1},D{1},useData,Data); %Exiting Differential at k1+k2
@@ -86,11 +86,11 @@ D1{1}=BoxDiff(k1+k2+1,rankC{1},rankD{1},C{1},D{1},useData,Data); %Entering Diffe
 %finally invert restrictions so as to get the product at the correct level
 
 %Restrict our generators to the bottom, so as to be able to multiply them (we can only multiply in the equivariant bases there)
-l=level;
-while l>1
-    GC{l/2}=restrict(GC{l},rankC{l}{k1+1},rankC{l/2}{k1+1});
-    GD{l/2}=restrict(GD{l},rankD{l}{k2+1},rankD{l/2}{k2+1});
-    l=l/2;
+lvl=level;
+while lvl>1
+    GC{lvl/2}=restrict(GC{lvl},rankC{lvl}{k1+1},rankC{lvl/2}{k1+1});
+    GD{lvl/2}=restrict(GD{lvl},rankD{lvl}{k2+1},rankD{lvl/2}{k2+1});
+    lvl=lvl/2;
 end
     
 %Now multiply on the bottom. To do that we need to pad left and right by
@@ -122,17 +122,17 @@ product{1}=[zeros(padleft,1);productcanon;zeros(padright,1)];
 
 %Invert restrictions. Remember l was used to go from level to 1. Now we do the opposite
 
-while l<level
-    totalrankMid{2*l}=ranktransfer(totalrankMid{l},l);
-    product{2*l}=invres(product{l},totalrankMid{l},l);
-    l=2*l;
+while lvl<level
+    rankMid{2*lvl}=ranktransfer(rankMid{lvl},lvl);
+    product{2*lvl}=invres(product{lvl},rankMid{lvl},lvl);
+    lvl=2*lvl;
 end
 
 %Now transfer the chains upstairs (no need to transfer the detailedrank, that's only for padding). 
 %We don't transfer the product, rather use the inverse of restriction as we want to get the product, not a multiple of it (transfer of restriction). 
 
-D0{level}=transferdifferential(D0{1},4/level,totalrankMid{1},totalrankLow);
-D1{level}=transferdifferential(D1{1},4/level,totalrankHigh,totalrankMid{1});
+D0{level}=transferdifferential(D0{1},4/level,rankMid{1},rankLow);
+D1{level}=transferdifferential(D1{1},4/level,rankHigh,rankMid{1});
 
 [~,Homologyatproduct,SmithVariables]=Homology(D1{level},D0{level});
 q=Homologyelement(product(level),SmithVariables);
