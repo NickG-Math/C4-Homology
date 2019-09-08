@@ -25,9 +25,6 @@ end
     
 k1=first(1); n1=first(2); m1=first(3); k2=second(1); n2=second(2); m2=second(3);
 
-%First we get our chains
-[rankC,C]=C4allChains(n1,m1,useData,Data);
-[rankD,D]=C4allChains(n2,m2,useData,Data);
 %Reindex appropriately
 k1=C4kreindex(k1,n1,m1);
 k2=C4kreindex(k2,n2,m2);
@@ -38,6 +35,10 @@ if k1<0 || k1>abs(n1)+2*abs(m1) || k2<0 || k2>abs(n2)+2*abs(m2)
     normalizedBasis=[];
     return
 end
+
+%Get our chains
+[rankC,C]=C4allChains(n1,m1,useData,Data);
+[rankD,D]=C4allChains(n2,m2,useData,Data);
 
 %Get generator and homology for both. Return empty basis if generator=0
 [GC{level},HC{level}]=Homology(C{level}{k1+2},C{level}{k1+1});
