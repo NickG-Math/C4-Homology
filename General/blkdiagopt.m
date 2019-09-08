@@ -1,4 +1,7 @@
-function D = blkdiagopt(A,k) %Makes block diagonal with A repeated k times
+function D = blkdiagopt(A,k) 
+%Inputs: Matrix A and int k
+%Outputs: Matrix D
+%Description: D is block diagonal with k blocks all equal to A
 n=size(A,1);
 m=size(A,2);
 D = zeros(n*k,m*k);
