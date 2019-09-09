@@ -1,7 +1,11 @@
 function change=changeofbasis(A,B) 
-%Inputs: Matrices A,B
-%Outputs: Matrix change
-%Description: Given two bases A,B in matrix form turn then into arrays (the actual bases) and get the change of basis matrix from A to B
+%
+%INPUT: Matrices A,B
+%
+%OUTPUT: Matrix "change"
+%
+%DESCRIPTION: Given two bases A,B in matrix form turn then into arrays (the actual bases) and get the change of basis matrix from A to B. 
+%
 %This only works if one matrix is a permutation of the other.
 
 %We first convert the bases into arrays

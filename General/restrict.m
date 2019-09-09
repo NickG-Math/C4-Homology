@@ -1,7 +1,10 @@
 function [res]=restrict(A,dom,ran) 
-%Inputs: Column A, arrays dom and ran
-%Outputs: Column res
-%Restricts element A one level down. The dom and ran are the ranks of the two levels. 
+%
+%INPUT: Column A, arrays dom and ran
+%
+%OUTPUT: Column res
+%
+%DESCRIPTION: Restricts element A one level down. The dom and ran are the ranks of the two levels. 
 
 res=zeros(sum(ran),1);
 

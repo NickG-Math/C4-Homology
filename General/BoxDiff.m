@@ -1,7 +1,10 @@
 function Boxed=BoxDiff(i,rankC,rankD,C,D,useData,Data)
-%Inputs: int i, cells of arrays rankC,rankD, cells of matrices C,D, logical useData and struct Data
-%Outputs: Matrix Boxed. 
-%Description: Given chain complexes C,D of ranks rankC,rankD, Boxed is the i-th differential of C tensor D.
+%
+%INPUT: int i, cells of arrays rankC,rankD, cells of matrices C,D, logical useData and struct Data
+%
+%OUTPUT: Matrix Boxed. 
+%
+%DESCRIPTION: Given chain complexes C,D of ranks rankC,rankD, Boxed is the i-th differential of C tensor D.
 
 s=size(C,2)-2; %C_0 up to C_s and C_{s+1}=0
 t=size(D,2)-2; %D_0 up to D_t and D_{t+1}=0

@@ -1,17 +1,22 @@
-function [Generator,Homology,SmithVariables]=Homology(D1,D0)
-%Inputs: Matrices D1,D0
-%Outputs: A column Generator, a row Homology and cell of matrices SmithVariables
-%Description: Homology is Ker(D0)/Im(D1) in "array form" eg [2,1] means Z/2+Z
-%For each entry in Homology the corresponding column of Generator is the generator of that group
-%SmithVariables is Q0i,zerovectors,P1,modoutcompletely,Homology. To be fed in Homologyelement
+function [Gen,Homol,SmithVariables]=Homology(D1,D0)
+%
+%INPUT: Matrices D1,D0
+%
+%OUTPUT: A column "Gen", a row "Homol" and cell of matrices "SmithVariables"
+%
+%Description: "Homol" is Ker(D0)/Im(D1) in array form eg [2,1] means Z/2+Z
+%
+%For each entry in "Homol" the corresponding column of "Gen" is the generator of that group.
+%
+%"SmithVariables" is Q0i,zerovectors,P1,modoutcompletely,Homol. To be fed in Homologyelement
 
 
     
 SmithVariables=cell(1,5);
 
 if isempty(D0) && isempty(D1)  %If both are empty then it's 0->0->0
-    Generator=0;
-    Homology=0;
+    Gen=0;
+    Homol=0;
     return
 elseif isempty(D0) %If D0=0 it's easier to sometimes give it as D0=[]. Here we fix it back to 0 (of the correct dimension)
     D0=zeros(1,size(D1,1));
@@ -34,8 +39,8 @@ for i=1:M
 end
 
 if ~any(any(kernelS0)) %If the kernel is zero don't even bother
-    Generator=zeros(M,1);
-    Homology=0;
+    Gen=zeros(M,1);
+    Homol=0;
     return
 end
 
@@ -69,19 +74,19 @@ modoutcompletely=(Image==1); %This records the diagonal values that are pm 1 i.e
 SmithVariables{4}=modoutcompletely;
 
 
-Generator=Kernel; %Initialization
-Generator(:,modoutcompletely)=[]; %The Generator becomes the kernel mod the image
+Gen=Kernel; %Initialization
+Gen(:,modoutcompletely)=[]; %The Generator becomes the kernel mod the image
 
-Homology=Image;%Initialization. 
+Homol=Image;%Initialization. 
 if size(Image,2)<size(Kernel,2)
-    Homology=[Homology,zeros(1,size(Kernel,2)-size(Image,2))]; %Homology must have as many elements as there are columns in the kernel so as to match with the generator after the killing below
+    Homol=[Homol,zeros(1,size(Kernel,2)-size(Image,2))]; %Homology must have as many elements as there are columns in the kernel so as to match with the generator after the killing below
 end
-Homology(modoutcompletely)=[]; %We don't record the Z/Z in homology. 
-Homology(Homology==0)=1; %Set the Z/0 into 1. The Z/n are set to n by default. 
+Homol(modoutcompletely)=[]; %We don't record the Z/Z in homology. 
+Homol(Homol==0)=1; %Set the Z/0 into 1. The Z/n are set to n by default. 
 
-if isempty(Generator)  %If everything has been killed, return 0 not empty.
-    Generator=zeros(M,1);
-    Homology=0;
+if isempty(Gen)  %If everything has been killed, return 0 not empty.
+    Gen=zeros(M,1);
+    Homol=0;
 end
 
-SmithVariables{5}=Homology;
+SmithVariables{5}=Homol;

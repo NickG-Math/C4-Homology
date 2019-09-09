@@ -1,6 +1,6 @@
 function write_C4_Mackey_List
-%Description: Writes the Mackey_List variable in C4_Mackey_List.mat. 
-%This is a cell of arrays and strings that forms a dictionary between the Lewis diagrams and names of Mackey functors
+%
+%DESCRIPTION: Writes the Mackey_List variable in C4_Mackey_List.mat. This is a cell of arrays and strings that forms a dictionary between the Lewis diagrams and names of Mackey functors
 
 %action, Res, Transfer, Homology
 MackeyList{1}={[0,0,0,0,0,0,0,0,0],"0"};

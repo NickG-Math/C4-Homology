@@ -1,7 +1,10 @@
 function mixed=matrixmixer(L,R)  
-%Inputs: Cells of matrices L,R
-%Outputs: Matrix mixed
-%Description: mixed mixes L,R as follows: First we have L{1}, then R{1} directly below, then L{2} directly to the right of R{1} then R{2} directly below of L{2}...
+%
+%INPUT: Cells of matrices L,R
+%
+%OUTPUT: Matrix mixed
+%
+%DESCRIPTION: Mixes L,R into mixed as follows: First we have L{1}, then R{1} directly below L{1}, then L{2} directly to the right of R{1} then R{2} directly below L{2}...
 
 emptyL=cellfun('isempty',L);
 emptyR=cellfun('isempty',R);

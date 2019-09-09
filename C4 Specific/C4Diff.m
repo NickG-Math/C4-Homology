@@ -1,7 +1,10 @@
 function [rankDom,rankRan,Diff]=C4Diff(i,n,m,useData,Data)
-%Inputs: ints i,n,m, logical useData, struct Data
-%Outputs: Cell of arrays rankDom, rankRan and cell of matrices Diff
-%Description: Computes the i-th differential for S^{nsigma+mlambda} and the ranks of its domain and range. The latter is required for transferring
+%
+%INPUT: ints i,n,m, logical useData, struct Data
+%
+%OUTPUT: Cell of arrays rankDom, rankRan and cell of matrices Diff
+%
+%DESCRIPTION: Computes the i-th differential for S^{nsigma+mlambda} and the ranks of its domain and range. The latter is required for transferring
 
 if n*m>=0 %No need to box
     if useData %Get the chains from Data

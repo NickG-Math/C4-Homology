@@ -1,9 +1,14 @@
 function write_Look_Up(maxpower,maxlengthA,maxlengthB)
-%Inputs: ints maxpower, maxlengthA, maxlengthB
-%Saves variable ChangeBasis to C4_Change_Basis.mat
-%Description: This is the lookup table that allows us to precompute boxchangebasis(A,B) for arrays A,B of length maxlengthA, maxlengthB resp 
+%
+%INPUT: ints maxpower, maxlengthA, maxlengthB
+%
+%DESCRIPTION: Saves variable ChangeBasis to C4_Change_Basis.mat
+%
+%This is the lookup table that allows us to precompute boxchangebasis(A,B) for arrays A,B of length maxlengthA, maxlengthB resp 
+%
 %The arrays must be of the form [2^?,2^maxpower,...,2^maxpower] or [2^maxpower,...,2^maxpower,2^?] where ?<=maxpower 
-%Changebsais is then a 7d cell of sparse logical matrices (or doubles for maxlengthA=maxlengthB=1)
+%
+%ChangeBasis is then a 7d cell of sparse logical matrices (or doubles for maxlengthA=maxlengthB=1)
 
 rankA=RankConstructor(maxpower,maxlengthA); %Create all our arrays
 rankB=RankConstructor(maxpower,maxlengthB);

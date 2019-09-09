@@ -1,14 +1,18 @@
-function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,Data)
-%Inputs: Arrays rankC, rankD, logical useData and struct Data
-%Outputs: Logical matrices convlefttocanon, convrighttocanon
-%Description: Writes down the canonical and left/right convenient bases for an equivariant basis 
-%given the two ranks, and then returns the change of basis matrices.
+function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,Data)\
+%
+%INPUT: Arrays rankC, rankD, logical useData and struct Data
+%
+%OUTPUT: Matrices convlefttocanon, convrighttocanon
+%
+%DESCRIPTION: Writes the canonical and left/right convenient bases given the two ranks and returns the change of basis matrices. 
+%
 %If useData=1 then use the precomputed data
+
+
 %Note: At this point we could have a try and catch block so that if we
 %haven't precomputed enough Data, the program reverts to computing everything instead
 %of haulting due to an error. The problem is that if there is no error, try
 %and catch actually incur a performance penalty.
-
 if useData
     ChangeBasis=Data.ChangeBasis; %Faster saving the variable here
     convlefttocanon=ChangeBasis{1,size(rankC,2),size(rankD,2),rankC(1),rankC(end),rankD(1),rankD(end)};

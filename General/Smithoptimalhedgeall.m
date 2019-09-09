@@ -1,8 +1,13 @@
 function [A,P,Q,Pi,Qi]= Smithoptimalhedgeall(A,wantP,wantQ,wantPi,wantQi) 
-%Inputs: Matrix A and logical wantP,wantQ,wantPi,wantQi
+%
+%INPUT: Matrix A and logical wantP,wantQ,wantPi,wantQi
+%
 %Outputs: Matrices A,P,Q,Pi,Qi
-%Description: The outputA is the Smith normal form of the inputA. 
+%
+%DESCRIPTION: The outputA is the Smith normal form of the inputA. 
+%
 %If all want? variables are 1, we have outputA=P*inputA*Q and inputA=Pi*outputA*Qi and P,Q,Pi,Qi are invertible matrices with Pi=inv(P) and Qi=inv(Q) 
+%
 %If a want? variable is 0 then the corresponding ? is [] and should NOT be used in any calculations.
 
 [M,N] = size(A);

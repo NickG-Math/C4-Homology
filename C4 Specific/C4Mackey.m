@@ -1,8 +1,13 @@
 function [Name,Homol,Gen,Tr,Res,act]=C4Mackey(k,n,m,useData,Data)
-%Inputs: ints k,n,m, logical useData and struct Data
-%Outputs: String Name, cell of arrays Homol,Tr,Res,act and cell of matrices Gen 
-%Descriptions: Computes the RO(C4) homology of a point.
+%
+%INPUT: ints k,n,m, logical useData and struct Data
+%
+%OUTPUT: String Name, cell of arrays Homol,Tr,Res,act and cell of matrices Gen 
+%
+%DESCRIPTION: Computes the RO(C4) homology of a point at (k,n,m) as a Mackey Functor. 
+%
 %Tr{2} is transfer 1->2, Tr{4} is 2->4, Res{2} is 2->1 and Res{4} is 4->2 and act{i} is the action on level i for i=1,2
+%
 %Name is the name of the Mackey functor
 
 

@@ -1,7 +1,11 @@
 function write_C4_Standard_Chains(rangeN,rangeM)
-%Inputs: positive ints rangeN, rangeM
-%Description: Writes cell of arrays rankStandard and cell of matrices ChainsStandard to C4_Standard_Chains.mat
+%
+%INPUT: positive ints rangeN, rangeM
+%
+%DESCRIPTION: Writes cell of arrays rankStandard and cell of matrices ChainsStandard to C4_Standard_Chains.mat
+%
 %These are the ranks and Chains of S^{nsigma+mlambda} for -rangeN<=n<=rangeN and -rangeM<=m<=rangeM
+
 %For C4 we only really need S^nsigma and S^mlambda for quick access but whatever
 
 rankStandard=cell(3,3,rangeN+1,rangeM+1);

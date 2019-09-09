@@ -1,11 +1,19 @@
 function [basis,normalizedBasis]=C4mult(level,first,second,useData,Data,varargin) 
-%Inputs: int level, arrays of first, second, logical useData, struct Data
-%Optional inputs: array varargin{1}=[x,y]
-%Outputs: arrays basis and normalizedBasis
-%Description: First computes the generator GC in coordinates of first=(k1,n1,m1) on the given level. Same for GD and second=(k2,n2,m2). The level must be the same for both so we can multiply.
+%
+%INPUT: int level, arrays of first, second, logical useData, struct Data
+%
+%OPTIONAL INPUT: array varargin{1}=[x,y]
+%
+%OUTPUT: arrays basis and normalizedBasis
+%
+%DESCRIPTION: First computes the generator GC in coordinates of first=(k1,n1,m1) on the given level. Same for GD and second=(k2,n2,m2). The level must be the same for both so we can multiply.
+%
 %Then takes the product GC*GD and writes it as a linear combination of generators and stores the coefficients in basis. 
+%
 %The basis is empty if GC=0 or GD=0. The normalizedBasis is equal to the basis modulo signs.
+%
 %If there are multiple generators in the coordinates of GC (non cyclic answer) we specify which generator we want through varargin{1}=[x,0] where x=1,2,... corresponds to the first,second,... generator 
+%
 %Similarly if we have multiple generators at GD we specify them via varargin{2}=[0,y]. Finally if there are multiple generators at both GC and GD then we use varargin{1}=[x,y]
 
 if isequal(first,zeros(1,3)) || isequal(second,zeros(1,3)) %We multiply with [0,0,0] i.e. 1. No point in any more computations
