@@ -1,7 +1,8 @@
-function rank=RankConstructor(maxpower,maxlength) %Constructs all  arrays of length<=maxlength and maximum entry maxentry that are of the form
-%[2^first,2^maxpower,...,2^maxpower] or [2^maxpower,...,2^maxpower,2^last] where
-%first<=maxpower and last <=maxpower. We hash them by recording first, last, and the total length.
-
+function rank=RankConstructor(maxpower,maxlength) 
+%Inputs: ints maxpower, maxlength
+%Outputs: cell of arrays rank
+%Description: rank contains all arrays of length<=maxlength of the form [2^?,2^maxpower,...,2^maxpower] or [2^maxpower,...,2^maxpower,2^?] where ?<=maxpower
+%Could be made faster by preallocating rank but whatever.
 i=1;
 for j=0:maxpower-1
     rank{i}=2.^j;

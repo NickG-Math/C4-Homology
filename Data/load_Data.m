@@ -1,4 +1,6 @@
 function Data=load_Data()
+%Outputs: struct Data
+%Description: loads all the data variables into a single structure Data.
 
 Data=struct(); %The variable that has all the data
 
