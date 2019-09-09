@@ -1,4 +1,4 @@
-function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,Data)\
+function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,Data)
 %
 %INPUT: Arrays rankC, rankD, logical useData and struct Data
 %
