@@ -107,10 +107,6 @@ rankLow=rankBox(k1+k2-1,rankC{1},rankD{1}); %Needed to transfer D0
 [rankMid{1},detailedrankMid]=rankBox(k1+k2,rankC{1},rankD{1}); %Where our generator lives. We need the detailedrank so as to pad appropriately. See below
 rankHigh=rankBox(k1+k2+1,rankC{1},rankD{1}); %Needed to transfer D1 
 
-
-D0{1}=BoxDiff(k1+k2,rankC{1},rankD{1},C{1},D{1},useData,Data); %Exiting Differential at k1+k2
-D1{1}=BoxDiff(k1+k2+1,rankC{1},rankD{1},C{1},D{1},useData,Data); %Entering Differential at k1+k2
-
 %Restrict our generators to the bottom, so as to be able to multiply them (we can only multiply in the equivariant bases there)
 %Remember lvl=level now
 while lvl>1
@@ -153,7 +149,15 @@ while lvl<level
 end
 %So finally we have the product of the generators at our level!
 
-%Now transfer the boxed differentials upstairs (no need to transfer the detailedrank, that's only been used for padding). 
+
+
+%Now we get the differentials of the box product.
+D0=cell(1,4); D1=cell(1,4);
+
+D0{1}=BoxDiff(k1+k2,rankC{1},rankD{1},C{1},D{1},useData,Data); %Exiting Differential at k1+k2
+D1{1}=BoxDiff(k1+k2+1,rankC{1},rankD{1},C{1},D{1},useData,Data); %Entering Differential at k1+k2
+
+%We transfer the boxed differentials upstairs (no need to transfer the detailedrank, that's only been used for padding). 
 
 D0{level}=transferdifferential(D0{1},4/level,rankMid{1},rankLow);
 D1{level}=transferdifferential(D1{1},4/level,rankHigh,rankMid{1});

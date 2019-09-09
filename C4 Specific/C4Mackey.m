@@ -32,6 +32,7 @@ for level=[2,4]
     D1{level}=transferdifferential(D1{1},4/level,rankDom,rank{1});
 end
 
+%Prealocate our Smithvariables
 SmithVariables=cell(1,4);
 for level=[1,2,4] %Get the Smithvariables now for transfers/restrictions/action
     [Gen{level},Homol{level},SmithVariables{level}]=Homology(D1{level},D0{level}); %Compute the homology
