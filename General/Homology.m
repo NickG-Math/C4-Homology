@@ -2,10 +2,8 @@ function [Generator,Homology,SmithVariables]=Homology(D1,D0)
 %Inputs: Matrices D1,D0
 %Outputs: A column Generator, a row Homology and cell of matrices SmithVariables
 %Description: Homology is Ker(D0)/Im(D1) in "array form" eg [2,1] means Z/2+Z
-%For each entry in Homology the corresponding column of Generator is the
-%generator of that group
-%SmithVariables is Q0i,zerovectors,P1,modoutcompletely,Homology
-%To be fed in Homologyelement
+%For each entry in Homology the corresponding column of Generator is the generator of that group
+%SmithVariables is Q0i,zerovectors,P1,modoutcompletely,Homology. To be fed in Homologyelement
 
 
     
