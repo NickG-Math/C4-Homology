@@ -1,6 +1,6 @@
 function change=changeofbasis(A,B) 
 %Inputs: Matrices A,B
-%Outputs: Logical matrix change
+%Outputs: Matrix change
 %Description: Given two bases A,B in matrix form turn then into arrays (the actual bases) and get the change of basis matrix from A to B
 %This only works if one matrix is a permutation of the other.
 
@@ -16,5 +16,5 @@ if size(B,1)>1
     B=B';
 end
 %We put 1 at position (i,j) when B(j)=A(i)
-change=(B'==A); %Very fast vectorized version
+change=double(B'==A); %Very fast vectorized version
 end
