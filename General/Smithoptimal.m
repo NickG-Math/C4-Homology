@@ -2,8 +2,7 @@ function [A,varargout] = Smithoptimal(A,wantP,wantQ)
 %Inputs: Matrix A and logical wantP and wantQ
 %Outputs: Matrix A 
 %Optional outputs: Matrices P,Q if wantP,wantQ are 1 respectively.
-%Description: The output is the Smith normal form of the input and
-%outputA=P*inputA*Q and P,Q are invertible matrices.
+%Description: The output is the Smith normal form of the input and outputA=P*inputA*Q and P,Q are invertible matrices.
 
 [M,N] = size(A);
 L=min(M,N);

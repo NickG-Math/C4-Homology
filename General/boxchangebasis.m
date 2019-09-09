@@ -3,7 +3,6 @@ function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,
 %Outputs: Logical matrices convlefttocanon, convrighttocanon
 %Description: Writes down the canonical and left/right convenient bases for an equivariant basis 
 %given the two ranks, and then returns the change of basis matrices.
-
 %If useData=1 then use the precomputed data
 %Note: At this point we could have a try and catch block so that if we
 %haven't precomputed enough Data, the program reverts to computing everything instead

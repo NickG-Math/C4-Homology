@@ -1,8 +1,7 @@
 function [rank,Chains]=C4standard(n,m)
 %Inputs: ints n,m
 %Outputs: Cell of arrays rank and cell of matrices Chains of equal length
-%Descriptions: Chains is the chain complex in the bottom level for the (n,m) sphere, with
-%Chains{i} being the i-1 differential. rank collects the ranks
+%Descriptions: Chains is the chain complex in the bottom level for the (n,m) sphere, with Chains{i} being the i-1 differential. rank collects the ranks
 
 
 rank=cell(1,abs(n)+2*abs(m)+2);

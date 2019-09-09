@@ -27,7 +27,7 @@ rank=cell(1,4); D0=cell(1,4); D1=cell(1,4);
 
 %We transfer the differentials and the rank at k (no point transferring the other two ranks)
 for level=[2,4]
-    rank{level}=ranktransfer(rank{level/2},level/2);
+    rank{level}=ranktransfer(rank{level/2},level/2,4);
     D0{level}=transferdifferential(D0{1},4/level,rank{1},rankRan);
     D1{level}=transferdifferential(D1{1},4/level,rankDom,rank{1});
 end

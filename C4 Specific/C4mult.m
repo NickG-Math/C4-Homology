@@ -49,8 +49,8 @@ end
 %Now we get the generators of C,D at k1,k2. First we need to transfer C,D at k1,k2 up to the given level
 lvl=1;
 while lvl<level
-    rankC{2*lvl}{k1+1}=ranktransfer(rankC{lvl}{k1+1},lvl);
-    rankD{2*lvl}{k2+1}=ranktransfer(rankD{lvl}{k2+1},lvl);
+    rankC{2*lvl}{k1+1}=ranktransfer(rankC{lvl}{k1+1},lvl,4);
+    rankD{2*lvl}{k2+1}=ranktransfer(rankD{lvl}{k2+1},lvl,4);
     lvl=2*lvl;
 end
 
@@ -143,7 +143,7 @@ product{1}=[zeros(padleft,1);productcanon;zeros(padright,1)];
 
 %Remember lvl=1 now
 while lvl<level
-    rankMid{2*lvl}=ranktransfer(rankMid{lvl},lvl);
+    rankMid{2*lvl}=ranktransfer(rankMid{lvl},lvl,4);
     product{2*lvl}=invres(product{lvl},rankMid{lvl},lvl);
     lvl=2*lvl;
 end
