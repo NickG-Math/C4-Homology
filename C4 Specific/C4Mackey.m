@@ -27,12 +27,16 @@ end
 rank=cell(1,4); D0=cell(1,4); D1=cell(1,4);
 
 [rank{1},rankRan,D0{1}]=C4Diff(k,n,m,useData,Data); %The rank at k, at k-1 and the differential exiting k
-[rankDom,~,D1{1}]=C4Diff(k+1,n,m,useData,Data); %The rank at k+1 and the differential exiting k
+if k<abs(n)+2*abs(m)
+    [rankDom,~,D1{1}]=C4Diff(k+1,n,m,useData,Data); %The rank at k+1 and the differential exiting k
+else
+    rankDom=[]; D1{1}=[]; %Make them empty
+end
 %We need the extra two ranks to transfer the differentials
 
 %We transfer the differentials and the rank at k (no point transferring the other two ranks)
 for level=[2,4]
-    rank{level}=ranktransfer(rank{level/2},level/2,4);
+    rank{level}=ranktransfer(rank{1},level,4);
     D0{level}=transferdifferential(D0{1},4/level,rank{1},rankRan);
     D1{level}=transferdifferential(D1{1},4/level,rankDom,rank{1});
 end

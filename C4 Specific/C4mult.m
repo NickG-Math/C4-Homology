@@ -55,11 +55,9 @@ for i=0:min(k1+k2+1,max2)
 end
 
 %Now we get the generators of C,D at k1,k2. First we need to transfer C,D at k1,k2 up to the given level
-lvl=1;
-while lvl<level
-    rankC{2*lvl}{k1+1}=ranktransfer(rankC{lvl}{k1+1},lvl,4);
-    rankD{2*lvl}{k2+1}=ranktransfer(rankD{lvl}{k2+1},lvl,4);
-    lvl=2*lvl;
+for lvl=2:2:level
+    rankC{lvl}{k1+1}=ranktransfer(rankC{1}{k1+1},lvl,4);
+    rankD{lvl}{k2+1}=ranktransfer(rankD{1}{k2+1},lvl,4);
 end
 
 %We transfer the exiting differential
@@ -116,7 +114,7 @@ rankLow=rankBox(k1+k2-1,rankC{1},rankD{1}); %Needed to transfer D0
 rankHigh=rankBox(k1+k2+1,rankC{1},rankD{1}); %Needed to transfer D1 
 
 %Restrict our generators to the bottom, so as to be able to multiply them (we can only multiply in the equivariant bases there)
-%Remember lvl=level now
+lvl=level;
 while lvl>1
     GC{lvl/2}=restrict(GC{lvl},rankC{lvl}{k1+1},rankC{lvl/2}{k1+1});
     GD{lvl/2}=restrict(GD{lvl},rankD{lvl}{k2+1},rankD{lvl/2}{k2+1});
@@ -149,12 +147,8 @@ product{1}=[zeros(padleft,1);productcanon;zeros(padright,1)];
 %This is the product of the restrictions on the bottom level. 
 %To get the actual product we invert the restrictions. 
 
-%Remember lvl=1 now
-while lvl<level
-    rankMid{2*lvl}=ranktransfer(rankMid{lvl},lvl,4);
-    product{2*lvl}=invres(product{lvl},rankMid{lvl},lvl);
-    lvl=2*lvl;
-end
+rankMid{level}=ranktransfer(rankMid{1},level,4);
+product{level}=invres(product{1},rankMid{level},rankMid{1});
 %So finally we have the product of the generators at our level!
 
 

@@ -1,26 +1,18 @@
-function top=invres(bottom,rankbottom,level)
+function unrestricted=invres(A,ranktop,rankbottom)
 %
-%INPUT: Column "bottom", array "rankbottom" and int "level"
+%INPUT: Column A, arrays ranktop and rankbottom
 %
-%OUTPUT: Column "top"
+%OUTPUT: Column unrestricted
 %
-%DESCRIPTION: The inverse of restriction (for free Mackey functors). 
+%DESCRIPTION: Given A at rankbottom, get unrestricted at ranktop s.t. Res(unrestricted)=A
 %
-%Given "bottom" at "level" return "top" one level higher with Res(top)=bottom (assuming that "bottom" is in the image of the Res)
-%
-%Sloppy code but it's used so so rarely that it really has no performance impact.
+%This assumes that A is in the image of the restriction. Also note that restrictions for free Mackey functors are injective.
 
-top=[];
-trackhor=0;
-transferlevel=2*level;
-for i=1:size(rankbottom,2)
-    next=[];
-    if rankbottom(i)>4/transferlevel
-        next=bottom(trackhor+1:trackhor+rankbottom(i)/2);
-    else
-        next=bottom(trackhor+1:trackhor+rankbottom(i));
-    end
-    top=[top;next];
-    trackhor=trackhor+rankbottom(i);
-end
+unrestricted=zeros(sum(ranktop),1);
+tracktop=0;
+trackbottom=0;
+for i=1:size(ranktop,2)
+    unrestricted(tracktop+1:tracktop+ranktop(i))=A(trackbottom+1:trackbottom+ranktop(i));
+    tracktop=tracktop+ranktop(i);
+    trackbottom=trackbottom+rankbottom(i);
 end
