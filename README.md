@@ -76,7 +76,7 @@ or like
 Mid Generator verified: usigma^4*bar(ulambda^2)
 ```
 
-There's no reason to waste time checking the bottom level generators as that just involves the *nonequivariant* homology of spheres.
+There's no reason to check the bottom level generators as that just involves the *nonequivariant* homology of spheres.
 
 To check the rest of the tables run any of the following
 
