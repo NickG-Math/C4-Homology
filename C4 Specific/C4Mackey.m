@@ -22,29 +22,12 @@ if k<0 || k>abs(n)+2*abs(m) %Empty chain complexes in that range
     return
 end
 
-%rank is the rank of the chains at k, D0 is the exiting differential and D1 the entering
-%We will transfer them to all levels 1,2,4 so preallocate now:
-rank=cell(1,4); D0=cell(1,4); D1=cell(1,4);
+%rank is the rank of the chains at k, we will use it for transfers/restrictions of generators.
+%SmithVariables will be used in Homologyelement to write these transfers/restrictions in terms of the generators
+rank=cell(1,4); SmithVariables=cell(1,4);
 
-[rank{1},rankRan,D0{1}]=C4Diff(k,n,m,useData,Data); %The rank at k, at k-1 and the differential exiting k
-if k<abs(n)+2*abs(m)
-    [rankDom,~,D1{1}]=C4Diff(k+1,n,m,useData,Data); %The rank at k+1 and the differential exiting k
-else
-    rankDom=[]; D1{1}=[]; %Make them empty
-end
-%We need the extra two ranks to transfer the differentials
-
-%We transfer the differentials and the rank at k (no point transferring the other two ranks)
-for level=[2,4]
-    rank{level}=ranktransfer(rank{1},level,4);
-    D0{level}=transferdifferential(D0{1},4/level,rank{1},rankRan);
-    D1{level}=transferdifferential(D1{1},4/level,rankDom,rank{1});
-end
-
-%Prealocate our Smithvariables
-SmithVariables=cell(1,4);
-for level=[1,2,4] %Get the Smithvariables now for transfers/restrictions/action
-    [Gen{level},Homol{level},SmithVariables{level}]=Homology(D1{level},D0{level}); %Compute the homology
+for level=[1,2,4]
+    [Homol{level},Gen{level},rank{level},SmithVariables{level}]=C4Homology(level,k,n,m,useData,Data);
 end
 
 %Now we compute transfers/restrictions/actions. First preallocate

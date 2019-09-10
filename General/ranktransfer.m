@@ -1,12 +1,10 @@
-function transferred=ranktransfer(rank,originallevel,n) 
+function rank=ranktransfer(rank,level,order) 
 %
-%INPUT: Array rank and ints originallevel, n
+%INPUT: Array rank and ints level,order
 %
 %OUTPUT: Array transferred
 %
-%DESCRIPTION: Transfers rank from originallevel to originallevel*2. originallevel is 1 at bottom. If our group is G=C2^n then n=2 
+%DESCRIPTION: Transfers rank from level 1 to given level. order is the order of the cyclic group
 
-halveit=(rank>n/(2*originallevel)); %Finds where rank>(n/2)*originallevel. These will need to be halved.  %eg for n=4, a 4 in C4/e transfers to a 2, and a 2 in C4/C2 transfers to a 1
-transferred=rank;
-transferred(halveit)=transferred(halveit)/2; %We halve them in a vectorized command
+rank(rank*level>order)=order/level;
 end

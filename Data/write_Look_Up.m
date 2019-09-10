@@ -13,7 +13,7 @@ function write_Look_Up(maxpower,maxlengthA,maxlengthB)
 rankA=RankConstructor(maxpower,maxlengthA); %Create all our arrays
 rankB=RankConstructor(maxpower,maxlengthB);
 
-
+ChangeBasis=cell(2,maxlengthA,maxlengthB,maxpower,maxpower,maxpower,maxpower);
 for i=1:size(rankA,2)
     A=rankA{i}; %Grab first array
     firstA=A(1);

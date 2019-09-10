@@ -6,11 +6,11 @@ function Boxed=BoxDiff(i,rankC,rankD,C,D,useData,Data)
 %
 %DESCRIPTION: Given chain complexes C,D of ranks rankC,rankD, Boxed is the i-th differential of C tensor D.
 
-s=size(C,2)-2; %C_0 up to C_s and C_{s+1}=0
-t=size(D,2)-2; %D_0 up to D_t and D_{t+1}=0
-%The box product is (C otimes D)_0 up to (C otimes D)_{s+t} and (C otimes D)_{s+t+1}=0
+s=size(C,2)-1;  %C_0 up to C_s 
+t=size(D,2)-1;  %D_0 up to D_t
+%The box product is (C otimes D)_0 up to (C otimes D)_{s+t}
 
-if i>0
+if i>0 %The first differential i=0 always maps to 0
     LeftDiff=cell(1,i+1); RightDiff=cell(1,i+1);
     %Initialized left and right differentials. Now we compute them bit by bit
     
@@ -72,7 +72,7 @@ if i>0
     %Left and right differentials have been computed and we can assemble them
     Boxed=matrixmixer(LeftDiff,RightDiff);
 else %i==0
-    Boxed=[]; %No point computing an empty differential
+    Boxed=[];
 end
 
 end
