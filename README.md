@@ -112,7 +112,7 @@ The larger the ```LargeNumber``` you select the more precomputed data you have a
 
 ## How about even faster?
 
-- Try parallel processing ([Wiki](https://github.com/NickG-Math/C4-Homology/wiki)).
+- Try [parallel processing](https://github.com/NickG-Math/C4-Homology/wiki/Parallel-Processing).
 
 - If you are using an AMD CPU, however recent, you should know that MATLAB uses the Intel MKL for matrix computations, which is optimized for Intel CPUs. So you should change the default BLAS (Basic Linear Algebra Subprograms) MATLAB uses to an open source one like OpenBLAS (I am not sure if this is possible with MATLAB; I believe it is with Octave but I have not tested it).
 
