@@ -67,13 +67,13 @@ Anyway the command above does three things:
 - Prints the answer in a form that looks like
 
 ```
-Top Generator verified: asigma^2&ast;alambda^3
+Top Generator verified: asigma^2*alambda^3
 ```
 
 or like
 
 ```
-Mid Generator verified: usigma^4&ast;bar(ulambda^2)
+Mid Generator verified: usigma^4*bar(ulambda^2)
 ```
 
 There's no reason to waste time checking the bottom level generators as that just involves the *nonequivariant* homology of spheres.
