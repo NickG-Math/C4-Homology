@@ -2,56 +2,37 @@ function [rankDom,rankRan,Diff]=C4Diff(i,n,m,useData,Data)
 %
 %INPUT: ints i,n,m, logical useData, struct Data
 %
-%OUTPUT: Cell of arrays rankDom, rankRan and cell of matrices Diff
+%OUTPUT: arrays rankDom, rankRan and matrix Diff
 %
 %DESCRIPTION: Computes the i-th differential for S^{nsigma+mlambda} and the ranks of its domain and range. The latter is required for transferring
 
 if n*m>=0 %No need to box
-    if useData %Get the chains from Data
-        A=Data.rankStandard{sign(n)+2,sign(m)+2,abs(n)+1,abs(m)+1};
-        B=Data.ChainsStandard{sign(n)+2,sign(m)+2,abs(n)+1,abs(m)+1};
-        rankDom=A{i+1};
-        
-        %Now we compute the rank of the range. This is needed to transfer the differential
-        if i>=1 %Otherwise the rank at the range is empty.
-            rankRan=A{i};
-        else
-            rankRan=[];
-        end
-        Diff=B{i+1};
-    else %Don't get them from Data
-        [A,B]=C4standard(n,m);
-        rankDom=A{i+1};
-        %Now we compute the rank of the range. This is needed to transfer the differential
-        if i>=1 %Otherwise the rank at the range is empty.
-            rankRan=A{i};
-        else
-            rankRan=[];
-        end
-        Diff=B{i+1};
-    end
+        [rankDom,Diff]=C4StandardDiff(i,n,m);
+        rankRan=size(Diff,1);
 end
 
+if n*m<0 %We need to box        
+        rankCsigma=cell(1,min(i+1,abs(n)+1)); Csigma=rankCsigma; rankClambda=cell(1,min(i+1,2*abs(m)+1)); Clambda=rankClambda;
+        for j=0:size(rankCsigma,2)-1
+            [rankCsigma{j+1},Csigma{j+1}]=C4StandardDiff(j,n,0);
+        end
+        for j=0:size(rankClambda,2)-1
+            [rankClambda{j+1},Clambda{j+1}]=C4StandardDiff(j,0,m);
+        end
+ 
+%Now deprecated due to high memory usage. If ever used again, make sure NOT to use the whole chains but to remove the last [] !!
+%rankCsigma=Data.rankStandard{sign(n)+2,2,abs(n)+1,1}; %We need all (or at least most) of the Chains to box
+%         Csigma=Data.ChainsStandard{sign(n)+2,2,abs(n)+1,1};
+%         rankClambda=Data.rankStandard{2,sign(m)+2,1,abs(m)+1}; %We need all (or at least most) of the Chains to box
+%         Clambda=Data.ChainsStandard{2,sign(m)+2,1,abs(m)+1};
 
-if n*m<0 %We need to box
-    if useData %Get the basic chains from Data
-        rankCsigma=Data.rankStandard{sign(n)+2,2,abs(n)+1,1}; %We need all (or at least most) of the Chains to box
-        Csigma=Data.ChainsStandard{sign(n)+2,2,abs(n)+1,1};
-        rankClambda=Data.rankStandard{2,sign(m)+2,1,abs(m)+1}; %We need all (or at least most) of the Chains to box
-        Clambda=Data.ChainsStandard{2,sign(m)+2,1,abs(m)+1};
-    else %Don't get them from Data
-        [rankCsigma,Csigma]=C4standard(n,0);
-        [rankClambda,Clambda]=C4standard(0,m);
-    end
-    
-    %Time to box. As before, the rank of the range is needed for transfering
+%Time to box. As before, the rank of the range is needed for transfering
     
     %We box lambda first sigma second
     
     rankDom=rankBox(i,rankClambda,rankCsigma);
     rankRan=rankBox(i-1,rankClambda,rankCsigma);
     Diff=BoxDiff(i,rankClambda,rankCsigma,Clambda,Csigma,useData,Data);
-    
     
     %We can also box the other way
     
