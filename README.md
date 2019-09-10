@@ -15,13 +15,10 @@ Download the repository and add it to your MATLAB path. Then type the following 
 ```
 write_Data(1,1);
 Data=load_Data;
+test_Pure_Homology(8,7,0,Data);
 ```
-This stores the list of the names of our Mackey functors in the variable ```Data``` (if you ever ```clear``` the workspace, you will need to run this command again). 
 
-Next run
-```test_Pure_Homology(8,7,0,Data);
-
-This command will perform three operations:
+The last command will perform three operations:
 
 - Compute the homology of 
 <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7
@@ -53,7 +50,6 @@ Finally to check <img src="http://latex.codecogs.com/svg.latex?S^{m\lambda-n\sig
 ```
 test_Lambda_Minus_Sigma(rangeN,rangeM,0,Data);
 ```
-
 ## But what about the multiplicative structure?
 
 For the multiplicative generators of <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> run
