@@ -8,11 +8,10 @@ function rank=RankConstructor(maxpower,maxlength)
 %
 %Could be made faster by preallocating rank but it doesn't matter as it's only called once.
 
-i=1;
-for j=0:maxpower-1
-    rank{i}=2.^j;
-    i=i+1;
+for j=0:maxpower-1 %The arrays of one element
+    rank{j+1}=2^j;
 end
+i=size(rank,2)+1;
 for length=1:maxlength-1
     rank{i}=2.^repmat(maxpower,1,length);
     i=i+1;

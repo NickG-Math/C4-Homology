@@ -7,9 +7,9 @@ function [rank,detailedrank]=rankBox(i,rankC,rankD)
 %DESCRIPTION: Compute the rank of the box product of chain complexes given their ranks at the index i. 
 %
 %detailedrank stores the rank of each summand in the box product separately. It's only used when multiplying generators (see C4mult).
-
-s=size(rankC,2)-2; %C_0 up to C_s and C_{s+1}=0
-t=size(rankD,2)-2; %D_0 up to D_t and D_{t+1}=0
+%
+s=size(rankC,2)-1; %C_0 up to C_s
+t=size(rankD,2)-1; %D_0 up to D_t
 %The box product is (C otimes D)_0 up to (C otimes D)_{s+t} and (C otimes D)_{s+t+1}=0
 
 if i>=0
