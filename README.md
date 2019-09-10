@@ -56,7 +56,7 @@ For the multiplicative generators of <img src="http://latex.codecogs.com/svg.lat
 ```
 test_Pure_Homology_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
-The input variables ```rangeN1, rangeN2, rangeM1, rangeM2``` specify the sets that the exponents of the Euler and orientation classes a<sub>&sigma;<\sub>, u<sub>2&sigma;</sub>, a<sub>&lambda;</sub>, u<sub>&lambda;</sub>``` are allowed to range in, respectively. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```.
+The input variables ```rangeN1, rangeN2, rangeM1, rangeM2``` specify the sets that the exponents of the Euler and orientation classes a<sub>&sigma;</sub>, u<sub>2&sigma;</sub>, a<sub>&lambda;</sub>, u<sub>&lambda;</sub>``` are allowed to range in, respectively. The relationship with the previous range variables is ```rangeN=rangeN1+2*rangeN2``` and ```rangeM=rangeM1+rangeM2```.
 
 Anyway the command above does three things:
 
