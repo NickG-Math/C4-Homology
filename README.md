@@ -108,7 +108,7 @@ Data=load_Data;
 ```
 for a large enough ```LargeNumber``` depending on the ranges you are using.
 
-The larger the ```LargeNumber``` you select the more precomputed data you have available and the wider the ranges you can check (in the current implementation, memory usage of ```Data``` is not an issue). ```LargeNumber=100``` should be more than enough for any reasonable ranges (increasing further will make ```write_Data(1,LargeNumber)``` a lot slower
+The larger the ```LargeNumber``` you select the more precomputed data you have available and the wider the ranges you can check (in the current implementation, memory usage of ```Data``` is not an issue). ```LargeNumber=100``` should be more than enough for any reasonable ranges (increasing it much further will make ```write_Data(1,LargeNumber)``` a lot slower and you will eventually run out of memory)
 
 ## How about even faster?
 
