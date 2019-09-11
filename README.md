@@ -4,10 +4,10 @@ This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Func
 Read the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki) for the full documentation. What follows is an **FAQ**; if you want to verify the results of our paper, in your preferred finite range, look no further.
 
 ## What do I need to run this code?
-All you need is a version of MATLAB.
- I have only tested it with v. R2019a but you can try your luck if you have previous versions of MATLAB or freeware like Octave that can run MATLAB code. 
+All you need is a version of MATLAB (no add-ons needed).
+ I have only tested it with v. R2019a but it should probably work with previous versions of MATLAB or freeware like Octave that can run MATLAB code. 
  If you are associated with a University you can probably get a free academic MATLAB license through your institution.
- At some point the project might be ported to C++ for wider availability and speed, but for now the code is in MATLAB
+ At some point the project might be ported to C++ or Julia for wider availability and speed, but for now the code is in MATLAB
 
 ## How do I compute the C4 homology of a point?
 Download the repository and add it to your MATLAB path. Then type the following in the command line:
