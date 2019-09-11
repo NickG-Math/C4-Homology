@@ -1,20 +1,30 @@
-function [Homol,Gen,rank,SmithVariables]=C4Homology(level,k,n,m,useData,Data)
+function [Homol,Gen,rank,SmithVariables]=C4Homology(levels,k,n,m,useData,Data)
 %
-%INPUT: ints level,k,n,m, logical useData and struct Data
+%INPUT: array levels, ints k,n,m, logical useData and struct Data
 %
-%OUTPUT: array Homol, matrix Gen, array rank, cell of matrices SmithVariables
+%OUTPUT: cell of arrays Homol, cell of matrices Gen, cell of arrays rank, cell of cells of matrices SmithVariables
 %
-%DESCRIPTION: Computes the homology and generators at level at (k,n,m) for REINDEXED k 
+%DESCRIPTION: Computes the homology and generators at the requested levels=[1,2,4] at (k,n,m) for REINDEXED k 
 %Also prints the rank at level and the SmithVariables (useful for other calculations)
 
-%We compute the ranks and differentials, all at the bottom level
-[rank_Bottom,rankRan,D0_Bottom]=C4Diff(k,n,m,useData,Data); %The rank at k, at k-1 and the differential exiting k
-[rankDom,~,D1_Bottom]=C4Diff(k+1,n,m,useData,Data); %The rank at k+1 and the differential exiting k
+
+%Preallocate for all possible levels
+Homol=cell(1,4); Gen=cell(1,4); rank=cell(1,4); SmithVariables=cell(1,4); D0=cell(1,4); D1=cell(1,4);
+
+%Do bottom level
+[rank{1},rankRan,D0{1}]=C4Diff(k,n,m,useData,Data); %The rank at k, at k-1 and the differential exiting k
+[rankDom,~,D1{1}]=C4Diff(k+1,n,m,useData,Data); %The rank at k+1 and the differential exiting k
 
 %We transfer the differentials and the rank at k (no point transferring the other two ranks)
-D0_Level=transferdifferential(D0_Bottom,4/level,rank_Bottom,rankRan);
-D1_Level=transferdifferential(D1_Bottom,4/level,rankDom,rank_Bottom);
+for level=levels
+    if level==1 %No need to transfer
+        [Gen{level},Homol{level},SmithVariables{level}]=Homology(D1{level},D0{level}); %Compute the homology
+    else
+        D0{level}=transferdifferential(D0{1},4/level,rank{1},rankRan);
+        D1{level}=transferdifferential(D1{1},4/level,rankDom,rank{1});
+        [Gen{level},Homol{level},SmithVariables{level}]=Homology(D1{level},D0{level}); %Compute the homology
+        rank{level}=ranktransfer(rank{1},level,4); % Transfer the rank to level
+    end
+end
 
-[Gen,Homol,SmithVariables]=Homology(D1_Level,D0_Level); %Compute the homology
-rank=ranktransfer(rank_Bottom,level,4); % Transfer the rank to level
 end

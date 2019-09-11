@@ -24,11 +24,8 @@ end
 
 %rank is the rank of the chains at k, we will use it for transfers/restrictions of generators.
 %SmithVariables will be used in Homologyelement to write these transfers/restrictions in terms of the generators
-rank=cell(1,4); SmithVariables=cell(1,4);
 
-for level=[1,2,4]
-    [Homol{level},Gen{level},rank{level},SmithVariables{level}]=C4Homology(level,k,n,m,useData,Data);
-end
+[Homol,Gen,rank,SmithVariables]=C4Homology([1,2,4],k,n,m,useData,Data); %Requesting all levels 1,2,4
 
 %Now we compute transfers/restrictions/actions. First preallocate
 

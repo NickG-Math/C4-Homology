@@ -55,7 +55,8 @@ for i=0:limit2
 end
 
 %Now we get the generators of C,D at k1,k2 and level. First is C
-[HC,GC,rankC{level}{k1+1}]=C4Homology(level,k1,n1,m1,useData,Data);
+[HC_Levels,GC_Levels,rankC_Levels]=C4Homology(level,k1,n1,m1,useData,Data);
+HC=HC_Levels{level}; GC=GC_Levels{level}; rankC{level}{k1+1}=rankC_Levels{level};
 if ~any(HC) %If homology is trivial return empty basis
     basis=[];
     normalBasis=[];
@@ -69,7 +70,8 @@ elseif size(HC,2)>1  %If multiple generators exist, use varargin to decide which
     end
 end
 %Now it's the D's turn
-[HD,GD,rankD{level}{k2+1}]=C4Homology(level,k2,n2,m2,useData,Data);
+[HD_Levels,GD_Levels,rankD_Levels]=C4Homology(level,k2,n2,m2,useData,Data);
+HD=HD_Levels{level}; GD=GD_Levels{level}; rankD{level}{k2+1}=rankD_Levels{level};
 if ~any(HD)
     basis=[];
     normalBasis=[];

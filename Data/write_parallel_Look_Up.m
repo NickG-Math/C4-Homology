@@ -16,14 +16,17 @@ parfor j=1:size(rankB,2)
     B=rankB{j};
     for i=1:size(rankA,2)
         A=rankA{i}; %Grab second array
+        if isequal(A,1) %No point storing identities
+            continue
+        end
         if size(A,2)==1 && size(B,2)==1 %Store as doubles in this super easy case for no overhead
             [C,D]=boxchangebasis(A,B,0,[]);
             Q1{i}=C;
             Q2{i}=D;
         else %store sparse for memory AND speed
             [C,D]=boxchangebasis(A,B,0,[]);
-            Q1{i}=sparse(C);
-            Q2{i}=sparse(D);
+            Q1{i}=sparse(logical(C));
+            Q2{i}=sparse(logical(D));
         end
     end
     V{j}=Q1;
@@ -33,6 +36,9 @@ end
 
 for i=1:size(rankA,2)
     A=rankA{i}; %Grab first array
+    if isequal(A,1) %No point storing identities
+        continue
+    end
     firstA=A(1);
     lastA=A(end);
     lengthA=size(A,2);
@@ -47,4 +53,4 @@ for i=1:size(rankA,2)
 end
 
 
-save('C4_Change_Basis.mat','ChangeBasis');
+save('C4_Change_Basis.mat','ChangeBasis','-v7.3');
