@@ -101,7 +101,7 @@ test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,1,Data);
 ```
 you will get an error 
 ```Index in position 3 exceeds array bounds (must not exceed 1).```
-This is because you didn't precompute enough data for these two functions. So you must first run
+This is because you haven't precomputed enough data for these two functions. So you must first run
 ```
 write_Data(1,LargeNumber);
 Data=load_Data;
