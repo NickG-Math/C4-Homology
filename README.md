@@ -87,7 +87,7 @@ test_Lambda_Minus_Sigma_Mult(rangeN1,rangeN2,rangeM1,rangeM2,0,Data);
 ```
 
 
-## Can I make the program go faster?
+## Can I make the program run faster?
 
 Significant speed improvements can be achieved by precomputing data so as to avoid repeat calculations. Just run the test functions with the third input being 1 eg
 ```
