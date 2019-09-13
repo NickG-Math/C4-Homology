@@ -23,9 +23,9 @@ The last command will perform three operations:
 - Compute the homology of 
 <img src="http://latex.codecogs.com/svg.latex?S^{n\sigma+m\lambda}" border="0"/> for n=0,...,8 and m=0,...,7
 
-- check the answer against the tables in our paper, giving out an error if there is a mismatch and
+- Check the answer against the tables in our paper, sending out an error message if there is a mismatch
 
-- print the answer in the form 
+- Print the answer in the form 
 ```
 The k homology of the (n,m) sphere is MackeyFunctorSymbol
 ```
@@ -62,7 +62,7 @@ The command above does three things:
 
 - Computes the product of these Euler and orientation classes and checks if it's a generator
 
-- Checks if the generator is also in our tables, sending out an error if not and
+- Checks the answer against our tables sending out an error message if not
 
 - Prints the answer in a form that looks like
 
