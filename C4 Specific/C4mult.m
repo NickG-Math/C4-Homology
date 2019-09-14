@@ -64,7 +64,7 @@ if ~any(HC) %If homology is trivial return empty basis
 elseif size(HC,2)>1  %If multiple generators exist, use varargin to decide which to use
     if isempty(varargin)
         disp(HC)
-        error('Multiple generators in the first sphere; please specify which of the above to use')
+        error('Multiple generators in the first sphere; please specify which of the above to use as final argument [x,0]')
     else
         GC=GC(:,varargin{1}(1));
     end
@@ -79,7 +79,7 @@ if ~any(HD)
 elseif size(HD,2)>1 %If multiple generators exist, use varargin to decide which to use
     if isempty(varargin)
         disp(HD)
-        error('Multiple generators in the second sphere; please specify which of the above to use')
+        error('Multiple generators in the second sphere; please specify which of the above to use  as final argument [0,y]')
     else
         GD=GD(:,varargin{1}(2));
     end
