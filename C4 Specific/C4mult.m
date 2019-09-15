@@ -1,14 +1,16 @@
 function [basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin) 
 %
-%INPUT: int level, arrays of first, second, logical useData, struct Data
+%[basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin) 
+%
+%INPUT: int level, arrays first and second, logical useData, struct Data
 %
 %OPTIONAL INPUT: array varargin{1}=[x,y]
 %
-%OUTPUT: arrays basis and normalizedBasis
+%%OUTPUT: arrays basis and normalizedBasis
 %
-%DESCRIPTION: Computes the generators GC, GD in coordinates first=(k1,n1,m1) and second=(k2,n2,m2) resp, on the given level.
+%DESCRIPTION: C4mult computes the generators GC, GD in coordinates first=(k1,n1,m1) and second=(k2,n2,m2) resp, on the given level.
 %
-%Then takes the product GC*GD and writes it as a linear combination of generators and stores the coefficients in basis. 
+%Then takes the product GC*GD and writes it as a linear combination of generators at (k1+k2,n1+n2,m1+m2) and stores the coefficients in variable basis. 
 %
 %The basis is empty if GC=0 or GD=0. The normalizedBasis is equal to the basis modulo signs.
 %
