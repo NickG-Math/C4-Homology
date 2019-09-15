@@ -1,5 +1,7 @@
 function Boxed=BoxDiff(i,rankC,rankD,C,D,useData,Data)
 %
+%Boxed=BoxDiff(i,rankC,rankD,C,D,useData,Data)
+%
 %INPUT: int i, cells of arrays rankC,rankD, cells of matrices C,D, logical useData and struct Data
 %
 %OUTPUT: Matrix Boxed. 

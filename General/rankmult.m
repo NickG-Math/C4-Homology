@@ -1,12 +1,13 @@
 function rank=rankmult(a,b)
 %
+%rank=RANKMULT(a,b)
+%
 %INPUT: Arrays a,b
 %
 %OUTPUT: Array rank
 %
-%DESCRIPTION: Takes two ranks a,b and produces the rank of the tensor product of the corresponding modules.
-%
-%Not preallocated or vectorized (as doing that results in worse performance). Code could probably be improved.
+%DESCRIPTION: Produces the rank of the tensor product of two modules given
+%their ranks. Not preallocated or vectorized. Code could probably be improved.
 
 if size(a,2)==1 && size(b,2)==1 %Quicker than going through the rest of the code
    rank=max(a,b)*ones(1,min(a,b)); %Just math

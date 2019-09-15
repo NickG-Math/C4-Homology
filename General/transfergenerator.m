@@ -1,10 +1,13 @@
 function transfer=transfergenerator(A,dom,ran) 
 %
+%transfer=TRANSFERGENERATOR(A,dom,ran) 
+%
 %INPUT: Column A, arrays dom and ran
 %
 %OUTPUT: Column transfer
 %
-%DESCRIPTION: Transfers element A one level up. The dom and ran are the ranks of the two levels. 
+%DESCRIPTION: Transfers element A one level up. 
+%dom and ran are the ranks of the two levels. 
 
 transfer=zeros(sum(ran),1);
 

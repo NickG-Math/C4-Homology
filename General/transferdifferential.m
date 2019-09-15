@@ -1,14 +1,16 @@
 function transfer=transferdifferential(A,n,dom,ran)  
 %
+%transfer=TRANSFERDIFFERENTIAL(A,n,dom,ran)  
+%
 %INPUT: matrix A, arrays dom,ran and int n
 %
 %OUTPUT: Matrix transfer
 %
-%DESCRIPTION: Takes the differential A at bottom level (level=1) and transfers it up n levels. 
+%DESCRIPTION: Takes the differential A at bottom level (level=1) and 
+%transfers it up n levels. dom and ran are the ranks of the domain and range
+%of the differential and are needed to transfer correctly for box products.
 %
-%dom and ran are the ranks of the domain and range of the differential and they are needed to transfer correctly for box products.
-%
-%Does not follow the usual rules of preallocation+vectorization as that might actually lower performance (extra calculations). This code could probably be improved.
+%Not preallocated/vectorized. Code could probably be improved.
 
 if isempty(A)
     transfer=A; 

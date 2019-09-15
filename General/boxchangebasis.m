@@ -1,12 +1,14 @@
 function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,Data)
 %
+%[convlefttocanon, convrighttocanon]=BOXCHANGEBASIS(rankC,rankD,useData,Data)
+%
 %INPUT: Arrays rankC, rankD, logical useData and struct Data
 %
 %OUTPUT: Matrices convlefttocanon, convrighttocanon
 %
-%DESCRIPTION: Writes the canonical and left/right convenient bases given the two ranks and returns the change of basis matrices. 
+%DESCRIPTION: BOXCHANGEBASIS writes the canonical and left/right convenient bases given the two ranks and returns the change of basis matrices. 
 %
-%If useData=1 then use the precomputed data
+%If useData=1 then it instead gets the answer from the precomputed data
 
 
 %Note: At this point we could have a try and catch block so that if we

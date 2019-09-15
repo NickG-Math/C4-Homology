@@ -1,5 +1,7 @@
 function [Gen,Homol,SmithVariables]=Homology(D1,D0)
 %
+%[Gen,Homol,SmithVariables]=Homology(D1,D0)
+%
 %INPUT: Matrices D1,D0
 %
 %OUTPUT: A column "Gen", a row "Homol" and cell of matrices "SmithVariables"

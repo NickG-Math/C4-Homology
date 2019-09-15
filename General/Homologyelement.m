@@ -1,14 +1,18 @@
 function element=Homologyelement(element,SmithVariables)
 %
+%element=Homologyelement(element,SmithVariables)
+%
 %INPUT: Cell of columns "element" and cell of matrices "SmithVariables"
 %
 %OUTPUT: Cell of columns "element"
 %
-%DESCRIPTION: Takes an element in the kernel and writes it as a linear combination of generators. Eg outputelement=[1,2,0] means inputelement=Gen1+2*Gen2+0*Gen3 in homology
+%DESCRIPTION: Takes an element in the kernel and writes it as a linear combination of generators. 
+%
+%Eg outputelement=[1,2,0] means inputelement=Gen1+2*Gen2+0*Gen3 in homology
 %
 %We can also do multiple elements at the same time, hence why we use cells
 %
-%The only thing that's needed are the SmithVariables from the Homology function.
+%The only extra thing that's needed are the SmithVariables from the Homology function.
 
 
 %To understand how this function works please compare with the  Homology function as mostly the same steps are performed.

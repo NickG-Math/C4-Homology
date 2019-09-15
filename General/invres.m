@@ -1,12 +1,15 @@
 function unrestricted=invres(A,ranktop,rankbottom)
 %
+%unrestricted=INVRES(A,ranktop,rankbottom)
+%
 %INPUT: Column A, arrays ranktop and rankbottom
 %
 %OUTPUT: Column unrestricted
 %
 %DESCRIPTION: Given A at rankbottom, get unrestricted at ranktop s.t. Res(unrestricted)=A
 %
-%This assumes that A is in the image of the restriction. Also note that restrictions for free Mackey functors are injective.
+%This assumes that A is in the image of the restriction. 
+%Also note that restrictions for free Mackey functors are injective.
 
 unrestricted=zeros(sum(ranktop),1);
 tracktop=0;

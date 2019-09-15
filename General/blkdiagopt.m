@@ -1,5 +1,7 @@
 function D = blkdiagopt(A,k) 
 %
+%D = BLKDIAGOPT(A,k) 
+%
 %INPUT: Matrix A and int k
 %
 %OUTPUT: Matrix D

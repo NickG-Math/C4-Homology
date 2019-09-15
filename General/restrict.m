@@ -1,10 +1,13 @@
 function restricted=restrict(A,dom,ran) 
 %
+%restricted=RESTRICT(A,dom,ran) 
+%
 %INPUT: Column A, arrays dom and ran
 %
 %OUTPUT: Column res
 %
-%DESCRIPTION: Restricts A at rank dom to restricted at rank ran. We don't need to specify the levels, only the ranks
+%DESCRIPTION: Restricts A at rank dom to restricted at rank ran. 
+%We don't need to specify the levels, only the ranks.
 
 restricted=zeros(sum(ran),1);
 

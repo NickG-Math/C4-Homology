@@ -1,14 +1,21 @@
 function [basis,normalBasis]=Multiply(order,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data) 
 %
+%[basis,normalBasis]=Multiply(order,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data) 
+%
 %INPUT: ints order,level,k1,k2, cells of cells of arrays rankC,rankD, cells C,D, columns GC,GD, logical useData, struct Data
 %
 %OUTPUT: arrays basis, normalBasis
 %
-%DESCRIPTION: Given two chains C,D and generators GC,GD of their homology at k1,k2 and level, write their product as a linear combination of the generators at k1+k2+1 and store them in basis
+%DESCRIPTION: Given two chains C,D and generators GC,GD of their homology
+%at k1,k2 and level, write their product as a linear combination of the
+%generators at k1+k2+1 and store them in basis
 %
-%normalBasis is equal to basis but normalized in that if basis(i) generates the corresponding homology Z/? then normalBasis(i)=1;
+%normalBasis is basis normalized: if basis(i) generates the i-th homology
+%then normalBasis(i)=1
 %
-%Note: C,D are given on bottom level, but rankC,rankD are given on bottom level and "level" level (i.e. they have been pretransferred to avoid repeat calculations). GC,GD are given on "level" level
+%Note: C,D are given on bottom level but rankC,rankD are given on bottom level
+%and "level" level (we pretransferred them to avoid repeat calculations). 
+%GC,GD are given on "level" level
 
 
 %In the product we are interested at index k1+k2. 
