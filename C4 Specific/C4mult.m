@@ -1,4 +1,4 @@
-function [basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin) 
+function [basis,normalBasis,Homologyatproduct]=C4mult(level,first,second,useData,Data,varargin) 
 %
 %[basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin) 
 %
@@ -6,13 +6,13 @@ function [basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin)
 %
 %OPTIONAL INPUT: array varargin{1}=[x,y]
 %
-%%OUTPUT: arrays basis and normalizedBasis
+%%OUTPUT: arrays basis, normalBasis and Homologyatproduct
 %
 %DESCRIPTION: C4mult computes the generators GC, GD in coordinates first=(k1,n1,m1) and second=(k2,n2,m2) resp, on the given level.
 %
 %Then takes the product GC*GD and writes it as a linear combination of generators at (k1+k2,n1+n2,m1+m2) and stores the coefficients in variable basis. 
 %
-%The basis is empty if GC=0 or GD=0. The normalizedBasis is equal to the basis modulo signs.
+%The basis is empty if GC=0 or GD=0. The normalBasis is equal to the basis modulo signs.
 %
 %If there are multiple options for GC (non cyclic homology) we specify which generator we want through varargin{1}=[x,0] where x=1,2,... corresponds to the first,second,... generator 
 %
@@ -88,5 +88,5 @@ elseif size(HD,2)>1 %If multiple generators exist, use varargin to decide which 
 end
 
 %We have our generators GC and GD. We now take their product
-[basis,normalBasis]=Multiply(4,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data);
+[basis,normalBasis,Homologyatproduct]=Multiply(4,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data);
 end
