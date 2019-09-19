@@ -1,10 +1,10 @@
-function [basis,normalBasis,Homologyatproduct]=Multiply(order,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data) 
+function [basis,normalBasis]=Multiply(order,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data) 
 %
 %[basis,normalBasis]=Multiply(order,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data) 
 %
 %INPUT: ints order,level,k1,k2, cells of cells of arrays rankC,rankD, cells C,D, columns GC,GD, logical useData, struct Data
 %
-%OUTPUT: arrays basis, normalBasis and Homologyatproduct
+%OUTPUT: arrays basis and normalBasis
 %
 %DESCRIPTION: Given two chains C,D and generators GC,GD of their homology
 %at k1,k2 and level, write their product as a linear combination of the

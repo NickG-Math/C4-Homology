@@ -1,4 +1,4 @@
-function [basis,normalBasis,Homologyatproduct]=C4mult(level,first,second,useData,Data,varargin) 
+function [basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin) 
 %
 %[basis,normalBasis]=C4mult(level,first,second,useData,Data,varargin) 
 %
@@ -6,7 +6,7 @@ function [basis,normalBasis,Homologyatproduct]=C4mult(level,first,second,useData
 %
 %OPTIONAL INPUT: array varargin{1}=[x,y]
 %
-%%OUTPUT: arrays basis, normalBasis and Homologyatproduct
+%%OUTPUT: arrays basis and normalBasis
 %
 %DESCRIPTION: C4mult computes the generators GC, GD in coordinates first=(k1,n1,m1) and second=(k2,n2,m2) resp, on the given level.
 %
@@ -88,5 +88,5 @@ elseif size(HD,2)>1 %If multiple generators exist, use varargin to decide which 
 end
 
 %We have our generators GC and GD. We now take their product
-[basis,normalBasis,Homologyatproduct]=Multiply(4,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data);
+[basis,normalBasis]=Multiply(4,level,k1,k2,rankC,rankD,C,D,GC,GD,useData,Data);
 end
