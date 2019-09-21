@@ -2,9 +2,9 @@ function Name=ExpressionParser(product,Counter,nameCounter)
 %
 %Name=ExpressionParser(product,Counter,nameCounter)
 %
-%INPUTS: int product, array Counter, cell of strings nameCounter
+%INPUTS: int product, array Counter, cell of characters nameCounter
 %
-%OUTPUT: string Name
+%OUTPUT: character Name
 %
 %DESCRIPTION: Give the names of the MoreIrreducibles and the product,
 %Counter specified by the Factorization function, return the name of the
