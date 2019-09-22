@@ -47,39 +47,54 @@ if all(gen<=0)
             i=(n+2*m+3+ k)/2;
             Counter{1}=[0,-n/2,-(i-2),-(m-i),0,0,1];
             product{1}=1;
-        elseif -n-1<=k && k<-1
+        elseif -n-1<=k && k<-1 && m>0
             i=(-k-3)/2;
             %x11/alambda=(2s3)/asigma so there are two ways to do this
             %So even though there are not two generators, we will still use
             %2 ideals to exproductess the two different forms
-            product{1}=2;
-            Counter{1}=[-(n-2*i),-i,-(m-2),0,0,0,1];
-            Counter{2}=[-(n-2*i-1),-i,-(m-1),0,0,1,0];
-            product{2}=1;
+            Counter{1}=[-(n-2*i-1),-i,-(m-1),0,0,1,0];
+            product{1}=1;
+            if m>=2
+                product{2}=2;
+                Counter{2}=[-(n-2*i),-i,-(m-2),0,0,0,1];
+            end
+        elseif -n-1<=k && k<-1 && m==0
+            i=(-k-3)/2;
+            product{1}=1;
+            Counter{1}=[-(n-2*i-3),-i,0,0,1,0,0];
         end
     else
-        if k==-n-2*m && m~=0
+        if k==-n-2*m && m>0
             %x12=(asigma s3)/u2sigma so multiple options
             product{1}=1;
             Counter{1}=[0,-(n-1)/2,0,-(m-1),0,1,0];
-            product{2}=1;
-            Counter{2}=[1,-(n+1)/2,0,-(m-2),0,0,1];
+            if m>=2
+                product{2}=1;
+                Counter{2}=[1,-(n+1)/2,0,-(m-2),0,0,1];
+            end
         elseif -n-2*m<k && k<-n-1 && mod(k,2)==1
             %x12=(asigma s3)/u2sigma so two ways
             i=(n+2*m+2+k)/2;
             product{1}=2;
             Counter{1}=[-1,-(n-1)/2,-(i-2),-(m-i),0,0,1];
-            product{2}=1;
-            Counter{2}=[1,-(n+1)/2,-(i-1),-(m-i-1),0,0,1];
-        elseif -n-1<=k && k<-1 && mod(k,2)==1
+            if m-i>=1
+                product{2}=1;
+                Counter{2}=[1,-(n+1)/2,-(i-1),-(m-i-1),0,0,1];
+            end
+        elseif -n-1<=k && k<-1 && mod(k,2)==1 && m>0
             i=(-k-3)/2;
             %x11/alambda=(2s3)/asigma so two ways
-            product{1}=2;
-            Counter{1}=[-(n-2*i),-i,-(m-2),0,0,0,1];
-            Counter{2}=[-(n-2*i-1),-i,-(m-1),0,0,1,0];
-            product{2}=1;
+            Counter{1}=[-(n-2*i-1),-i,-(m-1),0,0,1,0];
+            product{1}=1;
+            if m>=2
+                product{2}=2;
+                Counter{2}=[-(n-2*i),-i,-(m-2),0,0,0,1];
+            end
+        elseif -n-1<=k && k<-1 && m==0
+            i=(-k-3)/2;
+            product{1}=1;
+            Counter{1}=[-(n-2*i-3),-i,0,0,1,0,0];
         end
-
     end
 end
 
@@ -151,6 +166,9 @@ if gen(2)>0 && gen(3)<0 %sigma-lambda
             i=(k-n+2*m+4)/2;
             product{1}=1;
             Counter{1}=[1,(n-1)/2,-(i-2),-(m-i),0,0,1];
+        elseif k==n-2*m && m>=2
+            product{1}=1;
+            Counter{1}=[1,(n-1)/2,0,-(m-2),0,0,1];
         end
     end    
 end

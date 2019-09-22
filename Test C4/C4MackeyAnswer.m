@@ -14,7 +14,7 @@ if n>=0 && m>=0
         Mackey="Z";
     elseif k==n+2*m &&  mod(n,2)==1
         Mackey="Z_-";
-    elseif ((mod(n,2)==0 && k<n) || (mod(n,2)==1 && k<n+2*m ))&& mod(k,2)==0
+    elseif ((mod(n,2)==0 && k<n) || (mod(n,2)==1 && k<n+2*m ))&& mod(k,2)==0 && k>=0
         Mackey="Z/2";
     elseif mod(n,2)==0 && k>=n && k<n+2*m && mod(k,2)==0
         Mackey="Z/4";
@@ -23,7 +23,7 @@ if n>=0 && m>=0
     else
         Mackey="0";
     end
-elseif n<=0 && m<=0
+elseif n<=0 && m<=0 && k<=0 && k>=n+2*m
     if k==n+2*m && n==-1 && m==0
         Mackey="Z_-";
     elseif k==n+2*m && m==0 && n~=0 && mod(n,2)==0
@@ -34,11 +34,11 @@ elseif n<=0 && m<=0
         Mackey="L";
     elseif k==n+2*m && m~=0 && mod(n,2)==1
         Mackey="L_-";
-    elseif n<0 && abs(k)>=3 && mod(k,2)==1 && ((m==0 && abs(k)<abs(n)) || (m~=0 && mod(n,2)==0 &&  abs(k)<=abs(n)+1 ) || (m~=0 && mod(n,2)==1 &&  abs(k)<abs(n)+abs(2*m)))
+    elseif n<0 && k<=0 && abs(k)>=3 && mod(k,2)==1 && (m==0 && abs(k)<abs(n) || (m~=0 && mod(n,2)==0 &&  abs(k)<=abs(n)+1 ) || (m~=0 && mod(n,2)==1 &&  abs(k)<abs(n)+abs(2*m)))
         Mackey="Z/2";
-    elseif mod(n,2)==0 && abs(k)>=abs(n)+3 && abs(k)<abs(n+2*m) && mod(k,2)==1
+    elseif mod(n,2)==0 && k<=0 && abs(k)>=abs(n)+3 && abs(k)<abs(n+2*m) && mod(k,2)==1
         Mackey="Z/4";
-    elseif mod(n,2)==1 && abs(k)>=abs(n)+3 && abs(k)<abs(n+2*m) && mod(k,2)==0
+    elseif mod(n,2)==1&& k<=0  && abs(k)>=abs(n)+3 && abs(k)<abs(n+2*m) && mod(k,2)==0
         Mackey="overline Z/2";
     else
         Mackey="0";
