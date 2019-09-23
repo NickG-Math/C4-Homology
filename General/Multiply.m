@@ -46,9 +46,8 @@ leftconvproduct=ResGC.*ResGD(:)';
 leftconvproduct=leftconvproduct(:);  
 
 %Then we change the basis
-[convlefttocanon, ~]=boxchangebasis(rankC{1}{k1+1},rankD{1}{k2+1},useData,Data);
-productcanon=convlefttocanon*leftconvproduct;
-
+[Left_to_Canon, ~]=boxchangebasis(rankC{1}{k1+1},rankD{1}{k2+1},useData,Data);
+productcanon=leftconvproduct(Left_to_Canon,:);
 %Finally we pad it
 ResProduct=[zeros(padleft,1);productcanon;zeros(padright,1)];
 

@@ -4,9 +4,9 @@ function [convlefttocanon, convrighttocanon]=boxchangebasis(rankC,rankD,useData,
 %
 %INPUT: Arrays rankC, rankD, logical useData and struct Data
 %
-%OUTPUT: Matrices convlefttocanon, convrighttocanon
+%OUTPUT: Arrays convlefttocanon, convrighttocanon
 %
-%DESCRIPTION: BOXCHANGEBASIS writes the canonical and left/right convenient bases given the two ranks and returns the change of basis matrices. 
+%DESCRIPTION: BOXCHANGEBASIS writes the canonical and left/right convenient bases given the two ranks and returns the permutations definining the change of basis matrices. 
 %
 %If useData=1 then it instead gets the answer from the precomputed data
 
@@ -30,6 +30,8 @@ s=size(rankC,2); %The basis for C is x_1,gx_1,...,g^{rankC(1)-1}x_1,x_2,....,g^{
 t=size(rankD,2); %The basis for D is y_1,gy_1,...,g^{rankD(1)-1}y_1,y_2,....,g^{rankD(t)-1}y_t
 %We work with one equivariant basis at a time
 canonical=cell(s,t); leftconv=cell(s,t); rightconv=cell(t,s);
+
+order=max(max(rankC),max(rankD));
 for c=1:s
     for d=1:t
         rank=rankmult(rankC(c),rankD(d));
@@ -42,10 +44,13 @@ for c=1:s
         i=0:size(rank,2)-1;
         j=0:rank(1)-1;
 
-        helper=2^c*3^d*5.^mod(j,rankC(c)).*7.^mod(j+i',rankD(d)); %We store the elements of the canonical basis like so; it's faster than storing them as strings like "g^ix_jg^ky_j"
-        %Due to the behavior of bsxfun, we don't need 5.^repmat(mod(j,rankC(c)),1,ilimit) in the presence of the matrix given by 7^.
+        helper=c-1+(d-1)*s+mod(j,rankC(c))*t*s+mod(j+i',rankD(d))*order*t*s; 
+        %We store the elements of the canonical basis in this hashed form; 
+        %it's faster than storing them as strings like "g^*x_cg^*y_d"
+        %Due to the behavior of bsxfun, we don't need
+        %5.^repmat(mod(j,rankC(c)),1,ilimit) in the presence of the other matrices
         helper=helper'; helper=helper(:); 
-        canonical{c,d}=helper'; %Reshape into an array so as to avoid inconsistent concatenation
+        canonical{c,d}=helper'; %Reshape into an array so as to avoid inconsistent concatenation        
         %The assembly would otherwise be canonical(1,1);canonical(2,1);... so there is no problem with reshaping right now. 
         %We don't have to/shouldn't replace left and right convenient bases right now as
         %1. they are not assembled in this way, and
@@ -59,7 +64,8 @@ for c=1:s
                 
         i=0:rankD(d)-1;
         j=0:rankC(c)-1;
-        leftconv{c,d}=2^c*3^d*5.^j.*7.^repmat(i',1,rankC(c)); %Due to the behavior of bsxfun, we only need one repmat; the other is then done automatically
+        leftconv{c,d}=c-1+(d-1)*s+j*s*t+repmat(i',1,rankC(c))*order*s*t;
+        %Due to the behavior of bsxfun, we only need one repmat; the other is then done automatically
 
         %The right convenient basis for C tensor D is
         %xy,xgy,...,xg^{rankD(1)-1}y,

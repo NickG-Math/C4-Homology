@@ -8,7 +8,7 @@ function write_Look_Up(maxpower,maxlengthA,maxlengthB)
 %
 %The arrays must be of the form [2^?,2^maxpower,...,2^maxpower] or [2^maxpower,...,2^maxpower,2^?] where ?<=maxpower 
 %
-%ChangeBasis is then a 7d cell of sparse logical matrices (or doubles for maxlengthA=maxlengthB=1)
+%ChangeBasis is then a 7d cell of arrays
 
 rankA=RankConstructor(maxpower,maxlengthA); %Create all our arrays
 rankB=RankConstructor(maxpower,maxlengthB);
@@ -24,15 +24,9 @@ for i=1:size(rankA,2)
         firstB=B(1);
         lastB=B(end);
         lengthB=size(B,2);
-        if size(A,2)==1 && size(B,2)==1 %Store as doubles in this super easy case for no overhead
-            [C,D]=boxchangebasis(A,B,0,[]);
-            ChangeBasis{1,lengthA,lengthB,firstA,lastA,firstB,lastB}=C;
-            ChangeBasis{2,lengthA,lengthB,firstA,lastA,firstB,lastB}=D;
-        else %store sparse for memory AND speed
-            [C,D]=boxchangebasis(A,B,0,[]);
-            ChangeBasis{1,lengthA,lengthB,firstA,lastA,firstB,lastB}=sparse(C);
-            ChangeBasis{2,lengthA,lengthB,firstA,lastA,firstB,lastB}=sparse(D);
-        end
+        [C,D]=boxchangebasis(A,B,0,[]);
+        ChangeBasis{1,lengthA,lengthB,firstA,lastA,firstB,lastB}=uint16(C);
+        ChangeBasis{2,lengthA,lengthB,firstA,lastA,firstB,lastB}=uint16(D); %if A=1 then uint16 is good up to maxlength=2^(16-2*maxpower)-1. For C4 this is 4095 so we should upgrade to int32 for C64 and to int64 for C4096
     end
 end
 
