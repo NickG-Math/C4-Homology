@@ -11,8 +11,6 @@ function [Gen,Homol,SmithVariables]=Homology(D1,D0)
 %For each entry in "Homol" the corresponding column of "Gen" is the generator of that group.
 %
 %"SmithVariables" is Q0i,zerovectors,P1,modoutcompletely,Homol. To be fed in Homologyelement
-
-
     
 SmithVariables=cell(1,5);
 

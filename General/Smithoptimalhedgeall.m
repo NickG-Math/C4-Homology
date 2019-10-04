@@ -15,6 +15,7 @@ function [A,P,Q,Pi,Qi]= Smithoptimalhedgeall(A,wantP,wantQ,wantPi,wantQi)
 %If want?=0 then ?=[] and should NOT be used in any calculations.
 
 [M,N] = size(A);
+
 L=min(M,N);
 if wantP
     P=eye(M);
@@ -37,9 +38,6 @@ else
     Qi=[];
 end 
 
-
-
-
 %start indicates which row or column we are eliminating
 for start=1:L
     i=start+1; %i goes through the elements on the column after start and only increases once an element is eliminated to 0. So if i>M then the whole column has been eliminated
@@ -60,49 +58,48 @@ for start=1:L
                 i=q+1;
             else %If first term is nonzero
                 if A(i,start)==0
-                    i=i+1;
-                else
-                    if mod(A(i,start),A(start,start))==0 %Eliminate
-                        thequotient=A(i,start)/A(start,start);
-                        A(i,:)=A(i,:)-thequotient*A(start,:);
-                        if wantP
-                            P(i,:)=P(i,:)-thequotient*P(start,:);
-                        end
-                        if wantPi
-                            Pi(:,start)=Pi(:,start)+thequotient*Pi(:,i);
-                        end
-
-                        i=i+1;
-                    elseif mod(A(start,start),A(i,start))==0  %Swap then eliminate
-                        A([start,i],:)=A([i,start],:);
-                        thequotient=A(i,start)/A(start,start);
-                        A(i,:)=A(i,:)-thequotient*A(start,:);
-                        if wantP
-                            P([start,i],:)=P([i,start],:);
-                            P(i,:)=P(i,:)-thequotient*P(start,:);
-                        end
-                        if wantPi
-                            Pi(:,[start,i])=Pi(:,[i,start]);
-                            Pi(:,start)=Pi(:,start)+thequotient*Pi(:,i);
-                        end
-
-                        i=i+1;
-                        j=start+1;
-                    else %If none divides the other we get a remainder after eliminating, so we need to swap again.
-                        thequotient=floor(A(i,start)/A(start,start));
-                        A(i,:)=A(i,:)-thequotient*A(start,:);
-                        A([start,i],:)=A([i,start],:);
-                        if wantP
-                            P(i,:)=P(i,:)-thequotient*P(start,:);
-                            P([start,i],:)=P([i,start],:);
-                        end
-                        if wantPi
-                            Pi(:,start)=Pi(:,start)+thequotient*Pi(:,i);
-                            Pi(:,[start,i])=Pi(:,[i,start]);
-                        end
-
-                        j=start+1;
+                    i=find(A(i+1:end,start),1)+i;
+                end
+                if mod(A(i,start),A(start,start))==0 %Eliminate
+                    thequotient=A(i,start)/A(start,start);
+                    A(i,:)=A(i,:)-thequotient*A(start,:);
+                    if wantP
+                        P(i,:)=P(i,:)-thequotient*P(start,:);
                     end
+                    if wantPi
+                        Pi(:,start)=Pi(:,start)+thequotient*Pi(:,i);
+                    end
+                    
+                    i=i+1;
+                elseif mod(A(start,start),A(i,start))==0  %Swap then eliminate
+                    A([start,i],:)=A([i,start],:);
+                    thequotient=A(i,start)/A(start,start);
+                    A(i,:)=A(i,:)-thequotient*A(start,:);
+                    if wantP
+                        P([start,i],:)=P([i,start],:);
+                        P(i,:)=P(i,:)-thequotient*P(start,:);
+                    end
+                    if wantPi
+                        Pi(:,[start,i])=Pi(:,[i,start]);
+                        Pi(:,start)=Pi(:,start)+thequotient*Pi(:,i);
+                    end
+                    
+                    i=i+1;
+                    j=start+1;
+                else %If none divides the other we get a remainder after eliminating, so we need to swap again.
+                    thequotient=floor(A(i,start)/A(start,start));
+                    A(i,:)=A(i,:)-thequotient*A(start,:);
+                    A([start,i],:)=A([i,start],:);
+                    if wantP
+                        P(i,:)=P(i,:)-thequotient*P(start,:);
+                        P([start,i],:)=P([i,start],:);
+                    end
+                    if wantPi
+                        Pi(:,start)=Pi(:,start)+thequotient*Pi(:,i);
+                        Pi(:,[start,i])=Pi(:,[i,start]);
+                    end
+                    
+                    j=start+1;
                 end
             end
         end
@@ -122,48 +119,47 @@ for start=1:L
                 j=q+1;
             else
                 if A(start,j)==0
-                    j=j+1;
-                else
-                    if mod(A(start,j),A(start,start))==0 %If a(start,start) divides a(start,j) eliminate but don't swap (or will infinite loop)
-                        thequotient=A(start,j)/A(start,start);
-                        A(:,j)=A(:,j)-thequotient*A(:,start);
-                        if wantQ
-                            Q(:,j)=Q(:,j)-thequotient*Q(:,start);
-                        end
-                        if wantQi
-                            Qi(start,:)=Qi(start,:)+thequotient*Qi(j,:);
-                        end
-
-                        j=j+1;
-                    elseif   mod(A(start,start),A(start,j))==0 %If a(start,j) divides a(start,start) but not the opposite use a(start,j) instead
-                        A(:,[start,j])=A(:,[j,start]);
-                        thequotient=A(start,j)/A(start,start);
-                        A(:,j)=A(:,j)-thequotient*A(:,start);
-                        if wantQ
-                            Q(:,[start,j])=Q(:,[j,start]);
-                            Q(:,j)=Q(:,j)-thequotient*Q(:,start);
-                        end
-                        if wantQi
-                            Qi([start,j],:)=Qi([j,start],:);
-                            Qi(start,:)=Qi(start,:)+thequotient*Qi(j,:);
-                        end
-
-                        i=start+1;
-                        j=j+1;
-                     else %I.e. if a(start,j) does not divide a(start,start) and vice versa eliminate a(start,j) and swap
-                        thequotient=floor(A(start,j)/A(start,start));
-                        A(:,j)=A(:,j)-thequotient*A(:,start);
-                        A(:,[start,j])=A(:,[j,start]);
-                        if wantQ
-                            Q(:,j)=Q(:,j)-thequotient*Q(:,start);
-                            Q(:,[start,j])=Q(:,[j,start]);
-                        end
-                        if wantQi
-                            Qi(start,:)=Qi(start,:)+thequotient*Qi(j,:);
-                            Qi([start,j],:)=Qi([j,start],:);
-                        end
-                        i=start+1;
+                    j=find(A(start,j+1:end),1)+j;
+                end
+                if mod(A(start,j),A(start,start))==0 %If a(start,start) divides a(start,j) eliminate but don't swap (or will infinite loop)
+                    thequotient=A(start,j)/A(start,start);
+                    A(:,j)=A(:,j)-thequotient*A(:,start);
+                    if wantQ
+                        Q(:,j)=Q(:,j)-thequotient*Q(:,start);
                     end
+                    if wantQi
+                        Qi(start,:)=Qi(start,:)+thequotient*Qi(j,:);
+                    end
+                    
+                    j=j+1;
+                elseif   mod(A(start,start),A(start,j))==0 %If a(start,j) divides a(start,start) but not the opposite use a(start,j) instead
+                    A(:,[start,j])=A(:,[j,start]);
+                    thequotient=A(start,j)/A(start,start);
+                    A(:,j)=A(:,j)-thequotient*A(:,start);
+                    if wantQ
+                        Q(:,[start,j])=Q(:,[j,start]);
+                        Q(:,j)=Q(:,j)-thequotient*Q(:,start);
+                    end
+                    if wantQi
+                        Qi([start,j],:)=Qi([j,start],:);
+                        Qi(start,:)=Qi(start,:)+thequotient*Qi(j,:);
+                    end
+                    
+                    i=start+1;
+                    j=j+1;
+                else %I.e. if a(start,j) does not divide a(start,start) and vice versa eliminate a(start,j) and swap
+                    thequotient=floor(A(start,j)/A(start,start));
+                    A(:,j)=A(:,j)-thequotient*A(:,start);
+                    A(:,[start,j])=A(:,[j,start]);
+                    if wantQ
+                        Q(:,j)=Q(:,j)-thequotient*Q(:,start);
+                        Q(:,[start,j])=Q(:,[j,start]);
+                    end
+                    if wantQi
+                        Qi(start,:)=Qi(start,:)+thequotient*Qi(j,:);
+                        Qi([start,j],:)=Qi([j,start],:);
+                    end
+                    i=start+1;
                 end
             end
         end
