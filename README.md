@@ -1,5 +1,5 @@
 # C4-Homology
-This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor and more.
+This project computes the  RO(C<sub>4</sub>) homology of a point as a Green Functor and more. This has been supplanted by the C++ library <a href="https://github.com/NickG-Math/Mackey">Mackey</a>.
  
 Read the [Wiki](https://github.com/NickG-Math/C4-Homology/wiki) for the full documentation. What follows is an **FAQ**; if you want to verify the results of our paper, in your preferred finite range, look no further than what's below.
 
